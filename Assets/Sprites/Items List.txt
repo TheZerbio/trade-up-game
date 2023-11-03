@@ -1,5 +1,5 @@
 Pencil
-Eraser
+*Eraser
 Ballpoint Pen
 Notebook
 Keychain
