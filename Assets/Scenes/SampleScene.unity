@@ -2751,10 +2751,13 @@ MonoBehaviour:
   callDuration: 6
   minTraderForCurrentItem: 2
   maxTraderForCurrentItem: 8
-  traderPrefab: {fileID: 5687635819337682280, guid: 11815fc233cbcd14e8425ae99f87886e, type: 3}
+  traderPrefab: {fileID: 4264520629112482932, guid: 11815fc233cbcd14e8425ae99f87886e, type: 3}
   traderPrefabParent: {fileID: 818453957}
+  traderPrefabList: []
+  activeOffer: 0
   itemSpriteSlot: {fileID: 2146822570}
   myCurrentItem: {fileID: 7977582194799403671, guid: 5b911e2cea7656b4cb0590bb3fac351c, type: 3}
+  currentCallIndex: 0
 --- !u!4 &1657023537
 Transform:
   m_ObjectHideFlags: 0
