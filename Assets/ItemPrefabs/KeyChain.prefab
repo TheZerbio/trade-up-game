@@ -46,9 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tags: 0200000005000000
-  baseValue: 10
+  baseValue: 30
   sprite: {fileID: 21300000, guid: 74be96a449bae114aa2732312dfd4610, type: 3}
-  condition: 2
+  condition: 0
 --- !u!1 &7826273829531171449
 GameObject:
   m_ObjectHideFlags: 0

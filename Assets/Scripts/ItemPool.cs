@@ -72,7 +72,11 @@ public class ItemPool : MonoBehaviour
 
         if (possibleItems.Count > 0)
         {
-            Debug.Log("Item Found");
+            foreach(Item it in possibleItems)
+            {
+                Debug.Log("Generated Item: " + it.name + " | Condition: " + it.condition + " | Value: " + it.GetValueByCondition(it.condition));
+            }
+
             return possibleItems[Random.Range(0, possibleItems.Count)];
         }
         else

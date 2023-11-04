@@ -13,23 +13,12 @@ public class Trader : MonoBehaviour
     public int voiceType;
     public int stage;
     public Sprite profilePicture;
+    public Image tradeItemImageSlot;
     public Item traderItem;
     public AudioSource audioSource;
 
-    public void Start()
+    public void Awake()
     {
-        Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        ItemPool itemPool = GameObject.FindGameObjectWithTag("ItemPool").GetComponent<ItemPool>();
-
-        philantropy = Random.Range(0.5f, 1.5f);         // philantropy = Random.Range(-1.0F, 1.0F);
-        knowledge = Random.Range(0.1f, 0.4f);           // knowledge = Random.Range(-1.0F, 1.0F);
-        traderName = TradeUpUtility.GetRandomUsername();
-        starRating = TradeUpUtility.generateStarRating(philantropy, knowledge);
-
-        int traderItemValue = RandomOfferGenerator.GenerateItemValue(getSubjectiveValue(player.myCurrentItem), philantropy, knowledge);
-
-        traderItem = itemPool.GetRandomItemByValue(traderItemValue);
-
         int c_tag = Random.Range(0, 4);
         tags = new Tag[c_tag];
         for (int i = 0; i < c_tag; i++)
@@ -38,6 +27,26 @@ public class Trader : MonoBehaviour
             tags[i] = TradeUpUtility.allTags[y];
             Debug.Log("added a Tag");
         }
+
+        Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        ItemPool itemPool = GameObject.FindGameObjectWithTag("ItemPool").GetComponent<ItemPool>();
+
+        philantropy = Random.Range(0.5f, 1.5f);         // philantropy = Random.Range(-1.0F, 1.0F);
+        knowledge = Random.Range(0.1f, 0.4f);           // knowledge = Random.Range(-1.0F, 1.0F);
+        traderName = TradeUpUtility.GetRandomUsername();
+        starRating = TradeUpUtility.generateStarRating(philantropy, knowledge);
+
+        Debug.Log("Player Item Base Value: " + player.myCurrentItem.baseValue);
+        Debug.Log("Player Item Subjective Value: " + getSubjectiveValue(player.myCurrentItem));
+
+        int traderItemValue = RandomOfferGenerator.GenerateItemValue(getSubjectiveValue(player.myCurrentItem), philantropy, knowledge);
+
+        traderItem = itemPool.GetRandomItemByValue(traderItemValue);
+
+        if (traderItem != null)
+            tradeItemImageSlot.sprite = traderItem.sprite;
+
+        
         var Texts = gameObject.GetComponentsInChildren<Text>();
         for(int i = 0; i < Texts.Length; i++)
         {

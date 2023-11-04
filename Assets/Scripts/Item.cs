@@ -21,6 +21,6 @@ public class Item : MonoBehaviour
 
     public float getValue()
     {
-        return baseValue * TradeUpUtility.getConditionModifier(condition);
+        return baseValue; // * TradeUpUtility.getConditionModifier(condition);
     }
 }

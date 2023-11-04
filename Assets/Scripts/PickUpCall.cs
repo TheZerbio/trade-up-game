@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class PickUpCall : MonoBehaviour
 {
-    public AudioSource audioSource;
-    public AudioClip[] callClips;
+    //public AudioSource audioSource;
+    //public AudioClip[] callClips;
 
     private const string VoiceLinePATH = "VoiceClips";
 
@@ -33,13 +33,7 @@ public class PickUpCall : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        LoadVoiceClips();
     }
 
 

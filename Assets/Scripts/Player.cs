@@ -89,7 +89,14 @@ public class Player : MonoBehaviour
         myCurrentItem = traderPrefabList[currentTraderIndex].GetComponent<Trader>().traderItem;
         UpdateCurrentItem();
 
+        foreach(GameObject trader in traderPrefabList)
+        {
+            Destroy(trader);
+        }
+
         traderPrefabList.Clear();
+
+        currentTraderIndex = 0;
 
         GenerateTraderList();
     }
