@@ -48,10 +48,13 @@ ExportedObj/
 *.VC.db
 *.aseprite
 
+
 # Unity3D generated meta files
 *.pidb.meta
 *.pdb.meta
 *.mdb.meta
+*.png.meta
+*.aseprite.meta
 
 # Unity3D generated file on crash reports
 sysinfo.txt
