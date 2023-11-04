@@ -8,17 +8,21 @@ public class Trader
     public float philantropy; //Gut/Böse
     public float knowledge; // Fähigheite das Item richtig ein zu schätzen
     public float starRating = 2.5F;
+    public string traderName = "DefaultName";
     public Trader()
     {
         philantropy = Random.Range(-1.0F, 1.0F);
         knowledge = Random.Range(-1.0F, 1.0F);
+        traderName = TradeUpUtility.GetRandomUsername();
         starRating = TradeUpUtility.generateStarRating(philantropy, knowledge);
-        int c_tag = < Random.Range(0, 2);
+
+        int c_tag = Random.Range(0, 4);
         tags = new Tag[c_tag];
         for (int i = 0; i < c_tag; i++)
         {
-            int y = Random.Range(0, TradeUpUtility.allTags.Length - 1);
+            int y = Random.Range(0, TradeUpUtility.allTags.Length);
             tags[i] = TradeUpUtility.allTags[y];
+            Debug.Log("added a Tag");
         }
     }
 
@@ -37,6 +41,15 @@ public class Trader
         }
 
         return item.getValue() * intrestModifier;
+    }
+
+    public void print()
+    {
+        Debug.Log(traderName);
+        Debug.Log("" + philantropy + "   " + knowledge);
+        Debug.Log("StarRating: " + starRating);
+        Debug.Log(tags);
+        Debug.Log("------------------");
     }
    
 }
