@@ -25,4 +25,17 @@ public class TradeUpUtility
                 return 1.0F;
         }
     }
+
+    public static float generateStarRating(float philantropy, float knowledge)
+    {
+        float rating = 2.5F;
+        rating += philantropy;
+        rating += knowledge;
+        //Santitze in case of adjustment
+        if (rating < 0)
+            return 0;
+        if (rating > 5)
+            return 5;
+        return rating;
+    }
 }

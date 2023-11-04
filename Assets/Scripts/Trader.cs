@@ -5,8 +5,14 @@ using UnityEngine;
 public class Trader
 {
     public Tag[] tags;
+    public float philantropy; //Gut/Böse
+    public float knowledge; // Fähigheite das Item richtig ein zu schätzen
+    public float starRating = 2.5F;
     public Trader()
     {
+        philantropy = Random.Range(-1.0F, 1.0F);
+        knowledge = Random.Range(-1.0F, 1.0F);
+        starRating = TradeUpUtility.generateStarRating(philantropy, knowledge);
         int c_tag = < Random.Range(0, 2);
         tags = new Tag[c_tag];
         for (int i = 0; i < c_tag; i++)
