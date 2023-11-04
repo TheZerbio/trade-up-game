@@ -18,6 +18,7 @@ public class Trader : MonoBehaviour
     public AudioSource audioSource;
 
     private Text interests;
+    private Text zustand;
     private int c_tag;
     private int cTag = 0;
 
@@ -52,7 +53,7 @@ public class Trader : MonoBehaviour
         traderItem = itemPool.GetRandomItemByValue(traderItemValue, 0.9f, 1.1f);
 
         if (traderItem != null)
-            tradeItemImageSlot.sprite = traderItem.sprite;
+            tradeItemImageSlot.sprite = traderItem.gameObject.GetComponentInChildren<SpriteRenderer>().sprite;
 
         
         var Texts = gameObject.GetComponentsInChildren<Text>();
@@ -69,6 +70,11 @@ public class Trader : MonoBehaviour
             if (Texts[i].gameObject.name.Equals("Interessen"))
             {
                 interests = Texts[i];
+            }
+            if (Texts[i].gameObject.name.Equals("Zustand"))
+            {
+                zustand = Texts[i];
+                zustand.text = TradeUpUtility.getConditionString(traderItem.condition);
             }
         }
     }

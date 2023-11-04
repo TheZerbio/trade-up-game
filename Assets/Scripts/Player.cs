@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,9 +23,9 @@ public class Player : MonoBehaviour
     public int maxTraderForCurrentItem;
     public GameObject traderPrefab;
     public Transform traderPrefabParent;
-    private List<GameObject> traderPrefabList = new List<GameObject>();
+    public List<GameObject> traderPrefabList = new List<GameObject>();
     private int numberOfTraders;
-    private bool activeOffer = false;
+    public bool activeOffer = false;
 
     [Header("Player Item")]
     public Image itemSpriteSlot;
@@ -32,18 +33,18 @@ public class Player : MonoBehaviour
 
 
     private int currentTraderIndex = 0;
-    private int currentCallIndex = 0;
+    public int currentCallIndex = 0;
 
 
     public void Start()
     {
         UpdateCurrentItem();
-        GenerateTraderList();
+        GenerateTraderList(true);
     }
 
-    public void GenerateTraderList()
+    public void GenerateTraderList(bool firstItem)
     {
-        numberOfTraders = Random.Range(minTraderForCurrentItem, maxTraderForCurrentItem + 1);
+        numberOfTraders = GetNumberOfTradersBasedOnCurrentItemCondition(firstItem);
         numberOfOffers_Text.text = "Interessenten für dein Produkt: " + numberOfTraders;
 
         for (int i = 0; i < numberOfTraders; i++)
@@ -113,11 +114,11 @@ public class Player : MonoBehaviour
     {
         StopAllCoroutines();
         callWindow.SetActive(false);
-
         // play secondary voice lines of active trader
         Debug.Log("Play Next Line");
         voiceClipManager.PlayVoiceLine(traderPrefabList[currentTraderIndex].GetComponent<Trader>());
 
+        traderPrefabList[currentTraderIndex].GetComponent<Trader>().addInterestTag();
 
         currentCallIndex++;
 
@@ -155,7 +156,7 @@ public class Player : MonoBehaviour
         rejectTradeButton.gameObject.SetActive(false);
         callWindow.transform.GetChild(3).GetComponent<Button>().interactable = true;
 
-        GenerateTraderList();
+        GenerateTraderList(false);
     }
 
     public void RejectTrade()
@@ -173,12 +174,11 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-        Debug.Log("Show Call");
         bool lastCall = false;
 
         if ((currentCallIndex + 1) >= traderPrefabList.Count && !activeOffer)
         {
-            Debug.Log("Last Call");
+            //Debug.Log("Last Call");
             lastCall = true;
             callWindow.transform.GetChild(3).GetComponent<Button>().interactable = false;
         }
@@ -193,8 +193,6 @@ public class Player : MonoBehaviour
         {
             yield break;
         }
-
-        Debug.Log("Test");
 
         callWindow.SetActive(false);
 
@@ -212,7 +210,7 @@ public class Player : MonoBehaviour
 
     public void UpdateCurrentItem()
     {
-        itemSpriteSlot.sprite = myCurrentItem.sprite;
+        itemSpriteSlot.sprite = myCurrentItem.gameObject.GetComponentInChildren<SpriteRenderer>().sprite;
     }
 
     public void ChangeCurrentItem(Item newItem)
@@ -220,5 +218,25 @@ public class Player : MonoBehaviour
         myCurrentItem = newItem;
 
         UpdateCurrentItem();
+    }
+
+    public int GetNumberOfTradersBasedOnCurrentItemCondition(bool firstItem)
+    {
+        if (!firstItem)
+        {
+            switch (myCurrentItem.condition)
+            {
+                case Condition.Sammler: return Random.Range(6, 9); break;
+                case Condition.Neuwertig: return Random.Range(5, 8); break;
+                case Condition.Normal: return Random.Range(4, 7); break;
+                case Condition.Gebraucht: return Random.Range(3, 6); break;
+                case Condition.Defekt: return Random.Range(2, 5); break;
+                default: return Random.Range(2, 9); break;
+            }
+        }
+        else
+        {
+            return Random.Range(4, 7);
+        }
     }
 }
