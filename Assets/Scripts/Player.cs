@@ -9,7 +9,6 @@ public class Player : MonoBehaviour
 {
     public VoiceClipManager voiceClipManager;
     public TMP_Text numberOfOffers_Text;
-    public Text callTimerText;
 
     [Header("Call Settings")]
     public GameObject callWindow;
@@ -24,9 +23,9 @@ public class Player : MonoBehaviour
     public int maxTraderForCurrentItem;
     public GameObject traderPrefab;
     public Transform traderPrefabParent;
-    private List<GameObject> traderPrefabList = new List<GameObject>();
+    public List<GameObject> traderPrefabList = new List<GameObject>();
     private int numberOfTraders;
-    private bool activeOffer = false;
+    public bool activeOffer = false;
 
     [Header("Player Item")]
     public Image itemSpriteSlot;
@@ -34,7 +33,7 @@ public class Player : MonoBehaviour
 
 
     private int currentTraderIndex = 0;
-    private int currentCallIndex = 0;
+    public int currentCallIndex = 0;
 
 
     public void Start()
@@ -167,12 +166,11 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-        Debug.Log("Show Call");
         bool lastCall = false;
 
         if ((currentCallIndex + 1) >= traderPrefabList.Count && !activeOffer)
         {
-            Debug.Log("Last Call");
+            //Debug.Log("Last Call");
             lastCall = true;
             callWindow.transform.GetChild(3).GetComponent<Button>().interactable = false;
         }
@@ -187,8 +185,6 @@ public class Player : MonoBehaviour
         {
             yield break;
         }
-
-        Debug.Log("Test");
 
         callWindow.SetActive(false);
 

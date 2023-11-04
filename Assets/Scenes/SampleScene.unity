@@ -1232,7 +1232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1784,7 +1784,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 5
+  m_Text: 
 --- !u!1 &818453956
 GameObject:
   m_ObjectHideFlags: 0
@@ -2743,12 +2743,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   voiceClipManager: {fileID: 529177643}
   numberOfOffers_Text: {fileID: 1323172598}
-  callTimerText: {fileID: 794601153}
   callWindow: {fileID: 1923725757}
   acceptTradeButton: {fileID: 1120718999}
   rejectTradeButton: {fileID: 242957635}
   delayForNextCall_Offset: 3
-  delayForNextCall: 15
+  delayForNextCall: 10
   callDuration: 6
   minTraderForCurrentItem: 2
   maxTraderForCurrentItem: 8
@@ -2991,13 +2990,14 @@ GameObject:
   - component: {fileID: 1923725758}
   - component: {fileID: 1923725760}
   - component: {fileID: 1923725759}
+  - component: {fileID: 1923725761}
   m_Layer: 5
   m_Name: CurrentCallWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1923725758
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3061,6 +3061,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1923725757}
   m_CullTransparentMesh: 1
+--- !u!114 &1923725761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1923725757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce823073f89a8d44aad0798ce0ec307c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  callTimerText: {fileID: 794601153}
+  player: {fileID: 1657023536}
 --- !u!1 &1985566324
 GameObject:
   m_ObjectHideFlags: 0
