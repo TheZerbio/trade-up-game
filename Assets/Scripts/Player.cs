@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     public GameObject callWindow;
 
     [Header("Trader Settings")]
+    public Button acceptTradeButton;
+    public Button rejectTradeButton;
     public float delayForNextCall_Offset;
     public float delayForNextCall;
     public float callDuration;
@@ -46,9 +48,16 @@ public class Player : MonoBehaviour
         }
 
         Debug.Log("Zeig nur den 1. Trader in der UI an");
-        StartCoroutine(ShowCallAfterDelay(1, Random.Range(delayForNextCall - delayForNextCall_Offset, delayForNextCall + delayForNextCall_Offset)));
+
+        // Mache nur einen Call, wenn man mehr als 1 Angebot in der Warteschlange hat
+        if(numberOfTraders > 1)
+            StartCoroutine(ShowCallAfterDelay(1, Random.Range(delayForNextCall - delayForNextCall_Offset, delayForNextCall + delayForNextCall_Offset)));
 
         traderPrefabList[currentTraderIndex].SetActive(true);
+
+        // Wenn man nur 1 Angebot hat, dann deaktivier reject-button --> Man muss das Angebot annehmen
+        if (numberOfTraders == 1)
+            rejectTradeButton.interactable = false;
     }
 
     public void ShowNewOffer()
@@ -58,14 +67,36 @@ public class Player : MonoBehaviour
         traderPrefabList[currentTraderIndex].SetActive(false);
         currentTraderIndex++;
         traderPrefabList[currentTraderIndex].SetActive(true);
-        StartCoroutine(ShowCallAfterDelay(currentTraderIndex + 1, Random.Range(delayForNextCall - delayForNextCall_Offset, delayForNextCall + delayForNextCall_Offset)));
+        if (currentTraderIndex + 1 >= traderPrefabList.Count) 
+        {
+            rejectTradeButton.interactable = false;
+        }
+        else
+            StartCoroutine(ShowCallAfterDelay(currentTraderIndex + 1, Random.Range(delayForNextCall - delayForNextCall_Offset, delayForNextCall + delayForNextCall_Offset)));
     }
 
     public void RejectCall()
     {
         StopAllCoroutines();
+        callWindow.SetActive(false);
         Debug.Log("Play New Voice Line");
         StartCoroutine(ShowCallAfterDelay(currentTraderIndex + 1, Random.Range(delayForNextCall - delayForNextCall_Offset, delayForNextCall + delayForNextCall_Offset)));
+    }
+
+    public void AcceptTrade()
+    {
+        StopAllCoroutines();
+        myCurrentItem = traderPrefabList[currentTraderIndex].GetComponent<Trader>().traderItem;
+        UpdateCurrentItem();
+
+        traderPrefabList.Clear();
+
+        GenerateTraderList();
+    }
+
+    public void RejectTrade()
+    {       
+        ShowNewOffer();
     }
 
     private IEnumerator ShowCallAfterDelay(int traderIndex, float delay)
