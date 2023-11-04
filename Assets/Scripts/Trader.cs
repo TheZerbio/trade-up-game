@@ -17,6 +17,7 @@ public class Trader : MonoBehaviour
     public Item traderItem;
     public AudioSource audioSource;
     public delegate void TagAddedCallback();
+    private Text interests;
 
     public void Awake()
     {
@@ -58,6 +59,10 @@ public class Trader : MonoBehaviour
                 Texts[i].text = "" + starRating + "/5";
             }
             if (Texts[i].gameObject.name.Equals("NamensSchild"))
+            {
+                Texts[i].text = traderName;
+            }
+            if (Texts[i].gameObject.name.Equals("Interessen"))
             {
                 Texts[i].text = traderName;
             }
