@@ -81,13 +81,16 @@ public class Player : MonoBehaviour
             //currentTraderIndex++;
             traderPrefabList[currentTraderIndex].SetActive(true);
         }
-        
-        if (currentTraderIndex + 1 >= traderPrefabList.Count) 
+
+        if (currentTraderIndex + 1 >= traderPrefabList.Count)
         {
             rejectTradeButton.interactable = false;
         }
         else
-            StartCoroutine(ShowCallAfterDelay(currentTraderIndex + 1, Random.Range(delayForNextCall - delayForNextCall_Offset, delayForNextCall + delayForNextCall_Offset)));
+        {
+            currentTraderIndex++;
+            StartCoroutine(ShowCallAfterDelay(currentTraderIndex, Random.Range(delayForNextCall - delayForNextCall_Offset, delayForNextCall + delayForNextCall_Offset)));
+        }
     }
 
     public void RejectCall()
@@ -95,7 +98,7 @@ public class Player : MonoBehaviour
         StopAllCoroutines();
         callWindow.SetActive(false);
         Debug.Log("Play New Voice Line");
-        currentTraderIndex++;
+        //currentTraderIndex = ;
         StartCoroutine(ShowCallAfterDelay(currentTraderIndex, Random.Range(delayForNextCall - delayForNextCall_Offset, delayForNextCall + delayForNextCall_Offset)));
     }
 
@@ -143,7 +146,10 @@ public class Player : MonoBehaviour
             callWindow.SetActive(false);
 
             if ((traderIndex + 1) < traderPrefabList.Count)
-                StartCoroutine(ShowCallAfterDelay(traderIndex + 1, delayForNextCall));
+            {
+                currentTraderIndex++;
+                StartCoroutine(ShowCallAfterDelay(currentTraderIndex, delayForNextCall));
+            }
             else
                 Debug.Log("No More Offers/Traders");
         }
