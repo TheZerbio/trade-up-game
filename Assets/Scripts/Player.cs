@@ -52,7 +52,11 @@ public class Player : MonoBehaviour
 
     public void ShowNewOffer()
     {
-
+        StopAllCoroutines();
+        callWindow.SetActive(false);
+        traderPrefabList[currentTraderIndex].SetActive(false);
+        currentTraderIndex++;
+        traderPrefabList[currentTraderIndex].SetActive(true);
     }
 
     public void RejectCall()
