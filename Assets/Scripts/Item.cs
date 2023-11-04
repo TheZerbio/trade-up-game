@@ -11,15 +11,9 @@ public class Item : MonoBehaviour
     public Condition condition = Condition.Normal;
 
 
-    // Start is called before the first frame update
-    void Start()
+    public float GetValueByCondition(Condition condition)
     {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        return baseValue * TradeUpUtility.getConditionModifier(condition);
     }
 
     public float getValue()

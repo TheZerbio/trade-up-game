@@ -9,18 +9,21 @@ public class Trader : MonoBehaviour
     public float knowledge; // Fähigheite das Item richtig ein zu schätzen = informed
     public float starRating = 2.5F;
     public string traderName = "DefaultName";
-    public Item currentPlayerItem;
+    public Item traderItem;
 
-    public Trader()
+    public void Start()
     {
+        Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        ItemPool itemPool = GameObject.FindGameObjectWithTag("ItemPool").GetComponent<ItemPool>();
+
         philantropy = Random.Range(0.5f, 1.5f);         // philantropy = Random.Range(-1.0F, 1.0F);
         knowledge = Random.Range(0.1f, 0.4f);           // knowledge = Random.Range(-1.0F, 1.0F);
         traderName = TradeUpUtility.GetRandomUsername();
         starRating = TradeUpUtility.generateStarRating(philantropy, knowledge);
 
-        //int traderItemValue = RandomOfferGenerator.GenerateItemValue(getSubjectiveValue(), 1, philantropy, knowledge);
+        int traderItemValue = RandomOfferGenerator.GenerateItemValue(getSubjectiveValue(player.myCurrentItem), philantropy, knowledge);
 
-        currentPlayerItem = gameObject.GetComponentInChildren<Item>();
+        traderItem = itemPool.GetRandomItemByValue(traderItemValue);
 
         int c_tag = Random.Range(0, 4);
         tags = new Tag[c_tag];
@@ -32,7 +35,7 @@ public class Trader : MonoBehaviour
         }
     }
 
-    public float getSubjectiveValue(Item item)
+    public int getSubjectiveValue(Item item)
     {
         float intrestModifier = 1.0F;
         for (int i = 0; i < tags.Length; i++)
@@ -46,7 +49,7 @@ public class Trader : MonoBehaviour
             }
         }
 
-        return item.getValue() * intrestModifier;
+        return (int) (item.getValue() * intrestModifier);
     }
 
     public void print()
