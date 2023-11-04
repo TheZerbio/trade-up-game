@@ -245,7 +245,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1915.9, y: -32.059}
+  m_AnchoredPosition: {x: 1781, y: -30}
   m_SizeDelta: {x: 64.1179, y: 64.1179}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &43935624
@@ -387,10 +387,10 @@ RectTransform:
   m_Father: {fileID: 146357379}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -842, y: 5.475128}
-  m_SizeDelta: {x: 103.6968, y: 40.4242}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 130, y: 0}
+  m_SizeDelta: {x: 103.69678, y: 40.4242}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &81284286
 MonoBehaviour:
@@ -468,7 +468,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 325.5248}
+  m_AnchoredPosition: {x: 0, y: 361.7}
   m_SizeDelta: {x: 0, y: 134.9704}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &146357380
@@ -542,9 +542,9 @@ RectTransform:
   m_Father: {fileID: 146357379}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 909, y: 5.475128}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -70, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &158937975
@@ -623,7 +623,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1851.8, y: -32.05895}
+  m_AnchoredPosition: {x: 1716.8999, y: -30.000021}
   m_SizeDelta: {x: 64.1179, y: 64.1179}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &537289473
@@ -1280,8 +1280,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -468.6, y: -95.4823}
-  m_SizeDelta: {x: 937.21, y: 639.375}
+  m_AnchoredPosition: {x: -423.08835, y: -95.4823}
+  m_SizeDelta: {x: 846.1867, y: 639.375}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &818453958
 MonoBehaviour:
@@ -1356,8 +1356,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 490.2984, y: -258.36356}
-  m_SizeDelta: {x: 883.8068, y: 313.6126}
+  m_AnchoredPosition: {x: 484.84, y: -259.7858}
+  m_SizeDelta: {x: 753.43, y: 310.7681}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &868601331
 MonoBehaviour:
@@ -1636,7 +1636,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 651.14575, y: 5.4753113}
+  m_AnchoredPosition: {x: 569, y: -0.000048637}
   m_SizeDelta: {x: 373.7086, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1449275799
@@ -1788,8 +1788,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000041008, y: 0.000013351}
-  m_SizeDelta: {x: 1947.9755, y: 908.7979}
+  m_AnchoredPosition: {x: -1.1669, y: 1.167}
+  m_SizeDelta: {x: 1814.9359, y: 981.1525}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1590745484
 MonoBehaviour:
@@ -2065,7 +2065,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 594.641, y: 112.1}
+  m_AnchoredPosition: {x: 524, y: 112.1}
   m_SizeDelta: {x: 675.1216, y: 224.21}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1923725759
@@ -2278,7 +2278,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1787.7, y: -32.05895}
+  m_AnchoredPosition: {x: 1652.7998, y: -30.000021}
   m_SizeDelta: {x: 64.1179, y: 64.1179}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2031468059

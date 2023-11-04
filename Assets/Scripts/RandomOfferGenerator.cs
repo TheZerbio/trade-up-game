@@ -12,29 +12,37 @@ public static class RandomOfferGenerator
     public static float minInformed = 0.05f;
     public static float maxInformed = 0.4f;
 
-    public static int GenerateItemValue(int itemValue)
+    public static int[] GenerateItemValue(int itemValue, int offers, float eval, float informed)
     {
         // Zufallszahlengenerator erstellen
         Random random = new Random();
 
-        double eval = UnityEngine.Random.Range(minEval, maxEval);
-        double informed = UnityEngine.Random.Range(minInformed, maxInformed);
+        //double eval = UnityEngine.Random.Range(minEval, maxEval);
+        //double informed = UnityEngine.Random.Range(minInformed, maxInformed);
 
         double expectedItemValue = eval * itemValue;
         double expectedDeviation = informed * expectedItemValue;
 
-        double randomNumber = GenerateRandomNumberFromNormalDistribution(expectedItemValue, expectedDeviation, random);
+        Debug.Log("Eval Value: " + eval.ToString("F2"));
+        Debug.Log("Informed Value: " + informed.ToString("F2"));
 
-        while(randomNumber > expectedItemValue * 2 || randomNumber < expectedItemValue * 0.5f)
+        int[] itemValueList = new int[offers];
+
+        for (int i = 0; i < offers; i++)
         {
-            randomNumber = GenerateRandomNumberFromNormalDistribution(expectedItemValue, expectedDeviation, random);
+            double randomNumber = GenerateRandomNumberFromNormalDistribution(expectedItemValue, expectedDeviation, random);
+
+            while (randomNumber > expectedItemValue * 2 || randomNumber < expectedItemValue * 0.75f)
+            {
+                randomNumber = GenerateRandomNumberFromNormalDistribution(expectedItemValue, expectedDeviation, random);
+            }
+
+            itemValueList[i] = Mathf.RoundToInt((float)randomNumber);
+
+            Debug.Log("Generated Item Value: " + Mathf.RoundToInt((float)randomNumber));
         }
 
-        Debug.Log("Eval Value: " + eval.ToString("F2"));
-        Debug.Log("Informed Value: "+ informed.ToString("F2"));
-        Debug.Log("Generated Item Value: " + Mathf.RoundToInt((float)randomNumber));
-
-        return Mathf.RoundToInt((float)randomNumber);
+        return itemValueList;
     }
 
     static double GenerateRandomNumberFromNormalDistribution(double mean, double stdDev, Random random)
