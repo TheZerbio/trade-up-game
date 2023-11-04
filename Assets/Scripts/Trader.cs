@@ -11,12 +11,13 @@ public class Trader : MonoBehaviour
     public float starRating = 2.5F;
     public string traderName = "DefaultName";
     public int voiceType;
-    public int stage;
+    public bool firstCall;
     public Sprite profilePicture;
     public Image tradeItemImageSlot;
     public Item traderItem;
     public AudioSource audioSource;
     public delegate void TagAddedCallback();
+    private Text interests;
 
     public void Awake()
     {
@@ -58,6 +59,10 @@ public class Trader : MonoBehaviour
                 Texts[i].text = "" + starRating + "/5";
             }
             if (Texts[i].gameObject.name.Equals("NamensSchild"))
+            {
+                Texts[i].text = traderName;
+            }
+            if (Texts[i].gameObject.name.Equals("Interessen"))
             {
                 Texts[i].text = traderName;
             }
