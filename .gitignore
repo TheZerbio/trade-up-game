@@ -46,7 +46,6 @@ ExportedObj/
 *.mdb
 *.opendb
 *.VC.db
-*.aseprite
 
 
 # Unity3D generated meta files
@@ -55,6 +54,11 @@ ExportedObj/
 *.mdb.meta
 *.png.meta
 *.aseprite.meta
+# Just all meta files tbh
+*.meta
+
+# Aseprite Work-Files
+*.aseprite
 
 # Unity3D generated file on crash reports
 sysinfo.txt
@@ -74,4 +78,3 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
-*.meta
