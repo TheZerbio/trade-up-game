@@ -226,12 +226,12 @@ public class Player : MonoBehaviour
         {
             switch (myCurrentItem.condition)
             {
-                case Condition.Sammler: return Random.Range(6, 9); break;
-                case Condition.Neuwertig: return Random.Range(5, 8); break;
-                case Condition.Normal: return Random.Range(4, 7); break;
-                case Condition.Gebraucht: return Random.Range(3, 6); break;
-                case Condition.Defekt: return Random.Range(2, 5); break;
-                default: return Random.Range(2, 9); break;
+                case Condition.Sammler: return Random.Range(6, 9);
+                case Condition.Neuwertig: return Random.Range(5, 8);
+                case Condition.Normal: return Random.Range(4, 7);
+                case Condition.Gebraucht: return Random.Range(3, 6);
+                case Condition.Defekt: return Random.Range(2, 5);
+                default: return Random.Range(2, 9);
             }
         }
         else
