@@ -10,6 +10,7 @@ public class Trader : MonoBehaviour
     public float starRating = 2.5F;
     public string traderName = "DefaultName";
     public Item currentPlayerItem;
+    public AudioSource audioSource;
 
     public Trader()
     {
@@ -17,7 +18,6 @@ public class Trader : MonoBehaviour
         knowledge = Random.Range(0.1f, 0.4f);           // knowledge = Random.Range(-1.0F, 1.0F);
         traderName = TradeUpUtility.GetRandomUsername();
         starRating = TradeUpUtility.generateStarRating(philantropy, knowledge);
-
         //int traderItemValue = RandomOfferGenerator.GenerateItemValue(getSubjectiveValue(), 1, philantropy, knowledge);
 
         currentPlayerItem = gameObject.GetComponentInChildren<Item>();
