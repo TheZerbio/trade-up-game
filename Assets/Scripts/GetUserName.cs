@@ -12,5 +12,7 @@ public class GetUserName : MonoBehaviour
     {
         username = System.Environment.UserName;
         this.GetComponent<TMP_Text>().text = username;
+
+        RandomOfferGenerator.GenerateItemValue(10);
     }
 }
