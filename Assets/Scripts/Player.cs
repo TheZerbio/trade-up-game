@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
 {
     public VoiceClipManager voiceClipManager;
     public TMP_Text numberOfOffers_Text;
+    public Text callTimerText;
 
     [Header("Call Settings")]
     public GameObject callWindow;
