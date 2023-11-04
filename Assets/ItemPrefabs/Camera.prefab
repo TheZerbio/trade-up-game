@@ -45,9 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcc50bb8b23c77d49818192277be9960, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tags: 0000000004000000
+  tags: 0000000001000000
   baseValue: 10
-  sprite: {fileID: 21300000, guid: fef31e0694ad65047af4f4a40a1c3dfa, type: 3}
+  sprite: {fileID: 21300000, guid: 389eabcdeb3a9a84da7e3bc9a76bdddb, type: 3}
+  condition: 2
 --- !u!1 &7826273829531171449
 GameObject:
   m_ObjectHideFlags: 0
@@ -59,7 +60,7 @@ GameObject:
   - component: {fileID: 6870603997687846869}
   - component: {fileID: 1914231295452553697}
   m_Layer: 0
-  m_Name: Kamera
+  m_Name: SpriteGO
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -121,7 +122,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: fef31e0694ad65047af4f4a40a1c3dfa, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 389eabcdeb3a9a84da7e3bc9a76bdddb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
