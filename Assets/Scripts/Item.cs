@@ -8,6 +8,7 @@ public class Item : MonoBehaviour
     [Range(0.0F, 100.0F)]
     public float baseValue = 10;
     public Sprite sprite = null;
+    public Condition condition = Condition.Normal;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,5 +18,10 @@ public class Item : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public float getValue()
+    {
+        return baseValue * TradeUpUtility.getConditionModifier(condition);
     }
 }
