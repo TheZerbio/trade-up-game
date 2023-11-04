@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     public VoiceClipManager voiceClipManager;
+    public TMP_Text numberOfOffers_Text;
 
     [Header("Call Settings")]
     public GameObject callWindow;
@@ -41,8 +42,9 @@ public class Player : MonoBehaviour
     public void GenerateTraderList()
     {
         numberOfTraders = Random.Range(minTraderForCurrentItem, maxTraderForCurrentItem + 1);
+        numberOfOffers_Text.text = "Interessenten für dein Produkt: " + numberOfTraders;
 
-        for(int i = 0; i < numberOfTraders; i++)
+        for (int i = 0; i < numberOfTraders; i++)
         {
             GameObject trader = Instantiate(traderPrefab, traderPrefabParent);
             trader.SetActive(false);
@@ -66,7 +68,7 @@ public class Player : MonoBehaviour
     {
         StopAllCoroutines();
 
-        voiceClipManager.PlayVoiceLine(traderPrefabList[currentTraderIndex + 1].GetComponent<Trader>());
+        //voiceClipManager.PlayVoiceLine(traderPrefabList[currentTraderIndex + 1].GetComponent<Trader>());
 
         callWindow.SetActive(false);
         traderPrefabList[currentTraderIndex].SetActive(false);
