@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class PickUpCall : MonoBehaviour
+public class VoiceClipManager : MonoBehaviour
 {
     //public AudioSource audioSource;
     //public AudioClip[] callClips;
 
-    private const string VoiceLinePATH = "VoiceClips";
+    private const string VoiceClipPATH = "VoiceClips";
 
     public class VoiceClip
     {
@@ -76,7 +76,7 @@ public class PickUpCall : MonoBehaviour
     // This method should get called EARLY to load-in all the sound-files (could take some time)
     VoiceClip[] LoadVoiceClips()
     {
-        AudioClip[] acs = Resources.LoadAll<AudioClip>("VoiceClips");
+        AudioClip[] acs = Resources.LoadAll<AudioClip>(VoiceClipPATH);
 
         VoiceClip[] voiceClips = { };
 
