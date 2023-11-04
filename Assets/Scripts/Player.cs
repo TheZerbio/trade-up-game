@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    public VoiceClipManager voiceClipManager;
+
     [Header("Call Settings")]
     public GameObject callWindow;
 
@@ -63,6 +65,9 @@ public class Player : MonoBehaviour
     public void ShowNewOffer()
     {
         StopAllCoroutines();
+
+        voiceClipManager.PlayVoiceLine(traderPrefabList[currentTraderIndex + 1].GetComponent<Trader>());
+
         callWindow.SetActive(false);
         traderPrefabList[currentTraderIndex].SetActive(false);
         currentTraderIndex++;

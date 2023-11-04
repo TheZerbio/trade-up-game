@@ -1238,7 +1238,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 88d0285ab4b0f5c43b8084c561b51014, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2516,6 +2516,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb0efddc5a9c1464a8bf49f24991930d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  voiceClipManager: {fileID: 529177643}
   callWindow: {fileID: 1923725757}
   acceptTradeButton: {fileID: 1120718999}
   rejectTradeButton: {fileID: 242957635}

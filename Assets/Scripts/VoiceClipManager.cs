@@ -8,6 +8,7 @@ public class VoiceClipManager : MonoBehaviour
 {
     //public AudioSource audioSource;
     //public AudioClip[] callClips;
+    public VoiceClip[] vcs;
 
     private const string VoiceClipPATH = "VoiceClips";
 
@@ -33,12 +34,12 @@ public class VoiceClipManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        LoadVoiceClips();
+        vcs = LoadVoiceClips();
     }
 
 
 
-    void PlayVoiceLine(Trader trader, VoiceClip[] vcs)
+    public void PlayVoiceLine(Trader trader)
     {
         AudioSource source = trader.audioSource;
 
