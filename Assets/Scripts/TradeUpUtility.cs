@@ -175,4 +175,23 @@ public class TradeUpUtility
                 return "Unknown Tag";
         }
     }
+
+    public static string getConditionString(Condition condition)
+    {
+        switch (condition)
+        {
+            case Condition.Sammler:
+                return "Sammler";
+            case Condition.Neuwertig:
+                return "Neuwertig";
+            case Condition.Normal:
+                return "Normal";
+            case Condition.Gebraucht:
+                return "Gebraucht";
+            case Condition.Defekt:
+                return "Gebraucht";
+            default:
+                return "Unbekannt";
+        }
+    }
 }
