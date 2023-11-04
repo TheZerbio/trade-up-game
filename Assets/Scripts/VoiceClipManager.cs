@@ -1,13 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 
 
 public class VoiceClipManager : MonoBehaviour
 {
-    //public AudioSource audioSource;
-    //public AudioClip[] callClips;
     public VoiceClip[] vcs;
 
     private const string VoiceClipPATH = "VoiceClips";
@@ -34,19 +33,24 @@ public class VoiceClipManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("Loading VoiceClips");
         vcs = LoadVoiceClips();
+        Debug.Log(vcs.Length + " VoiceClips loaded");
     }
 
+    // philantropy = Random.Range(0.5f, 1.5f);         // philantropy = Random.Range(-1.0F, 1.0F);
+    // knowledge = Random.Range(0.1f, 0.4f);           // knowledge = Random.Range(-1.0F, 1.0F);
 
 
     public void PlayVoiceLine(Trader trader)
     {
         AudioSource source = trader.audioSource;
 
-        float phil = trader.philantropy; // + standard deviation
-        float know = trader.knowledge;
+        // converting schenanigans
+        float phil = trader.philantropy*2 - 2.0f; // 0.5,1.5 -> -1,1   
+        float know = trader.knowledge*2 - 0.2f; // 0.1,0.4 -> 0,1
 
-        float[] distances = { };
+        float[] distances = new float[vcs.Length];
 
         float min = float.MaxValue;
 
@@ -55,22 +59,27 @@ public class VoiceClipManager : MonoBehaviour
         for (int i = 0; i < vcs.Length; i++)
         {
             // filter by firstCall & voiceType
-            if (vcs[i].firstCall != trader.firstCall) break;
-            if (vcs[i].voiceType != trader.voiceType) break;
-
-            float phildiff = phil - vcs[i].philanthropy;
-            float knowdiff = know - vcs[i].knowledge;
-
-            distances[i] = MathF.Sqrt(MathF.Pow(phildiff, 2) + MathF.Pow(knowdiff, 2));
-
-            if(distances[i] < min)
+            if (vcs[i].firstCall == trader.firstCall && vcs[i].voiceType == trader.voiceType)
             {
-                minIndex = i;
-                min = distances[i];
+                float phildiff = phil - vcs[i].philanthropy;
+                float knowdiff = know - vcs[i].knowledge;
+
+                distances[i] = MathF.Sqrt(MathF.Pow(phildiff, 2) + MathF.Pow(knowdiff, 2));
+
+                if (distances[i] < min)
+                {
+                    minIndex = i;
+                    min = distances[i];
+                }
             }
         }
 
-        source.clip = vcs[minIndex].audioClip;
+        VoiceClip bestVoiceClip = vcs[minIndex];
+
+        Debug.Log("Stimme: " + trader.voiceType + " Erster Satz: " + trader.firstCall);
+        Debug.Log("Interest T/V: " + phil + "/" + bestVoiceClip.philanthropy + " Knowledge T/V: " + know + "/" + bestVoiceClip.knowledge);
+
+        source.clip = bestVoiceClip.audioClip;
         source.Play();
     }
 
@@ -79,7 +88,7 @@ public class VoiceClipManager : MonoBehaviour
     {
         AudioClip[] acs = Resources.LoadAll<AudioClip>(VoiceClipPATH);
 
-        VoiceClip[] voiceClips = { };
+        VoiceClip[] voiceClips = new VoiceClip[acs.Length];
 
         for (int i = 0; i < acs.Length; i++)
         {
@@ -93,9 +102,8 @@ public class VoiceClipManager : MonoBehaviour
 
             bool firstCall = (Int32.Parse(temp2[1].Substring(1)) == 1);
 
-            float philantrophy = float.Parse(temp2[2]);
-
-            float knowledge = float.Parse(temp2[3]);
+            float philantrophy = float.Parse(temp2[2], CultureInfo.InvariantCulture);
+            float knowledge = float.Parse(temp2[3], CultureInfo.InvariantCulture);
 
             VoiceClip vc = new VoiceClip(voiceType, firstCall, philantrophy, knowledge, acs[i]);
 

@@ -70,11 +70,16 @@ public class Player : MonoBehaviour
     {
         StopAllCoroutines();
 
-        //voiceClipManager.PlayVoiceLine(traderPrefabList[currentTraderIndex + 1].GetComponent<Trader>());
-
         callWindow.SetActive(false);
 
         currentTraderIndex = currentCallIndex;
+
+        Trader activeTrader = traderPrefabList[currentTraderIndex].GetComponent<Trader>();
+
+        // play random opening line
+        voiceClipManager.PlayVoiceLine(activeTrader);
+        // disable opening lines from same trader
+        activeTrader.firstCall = false;
 
         if (!activeOffer)
         {
@@ -108,7 +113,12 @@ public class Player : MonoBehaviour
     {
         StopAllCoroutines();
         callWindow.SetActive(false);
-        Debug.Log("Play New Voice Line");
+
+        // play secondary voice lines of active trader
+        Debug.Log("Play Next Line");
+        voiceClipManager.PlayVoiceLine(traderPrefabList[currentTraderIndex].GetComponent<Trader>());
+
+
         currentCallIndex++;
 
         // Wenn ich den letzten call gerade abgelehnt habe, dann disable reject button

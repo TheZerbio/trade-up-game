@@ -42,7 +42,7 @@ public class Trader : MonoBehaviour
         traderName = TradeUpUtility.GetRandomUsername();
         starRating = TradeUpUtility.generateStarRating(philantropy, knowledge);
         firstCall = true;                   // to get the intro voiceline first
-        voiceType = Random.Range(1, 2);     // random person voice
+        voiceType = 1; //Random.Range(1, 2);     // random person voice
 
         Debug.Log("Player Item Base Value: " + player.myCurrentItem.baseValue);
         Debug.Log("Player Item Subjective Value: " + getSubjectiveValue(player.myCurrentItem));
