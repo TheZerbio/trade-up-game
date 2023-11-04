@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 94.42185, y: -132.4241}
-  m_SizeDelta: {x: 288.8437, y: 73.2482}
+  m_AnchoredPosition: {x: 150.61984, y: -74.99683}
+  m_SizeDelta: {x: 401.2397, y: 41.8819}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4919767834488350968
 CanvasRenderer:
@@ -70,8 +70,8 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: dada87edcf3318149985a242bc6bab64, type: 3}
     m_FontSize: 25
     m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 0
+    m_BestFit: 1
+    m_MinSize: 15
     m_MaxSize: 50
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -290,6 +290,7 @@ MonoBehaviour:
   starRating: 2.5
   traderName: DefaultName
   voiceType: 0
+  stage: 0
   profilePicture: {fileID: 0}
   traderItem: {fileID: 0}
   currentPlayerItem: {fileID: 0}
