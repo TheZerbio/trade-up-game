@@ -10,7 +10,10 @@ public class Item : MonoBehaviour
     public Sprite sprite = null;
     public Condition condition = Condition.Normal;
 
-
+    public void Start()
+    {
+        sprite = gameObject.GetComponentInChildren<SpriteRenderer>().sprite;
+    }
     public float GetValueByCondition(Condition condition)
     {
         return baseValue * TradeUpUtility.getConditionModifier(condition);

@@ -1440,7 +1440,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemList:
+  - {fileID: 3222424741059186186, guid: 388041914c64e35478d10222a4cbc228, type: 3}
+  - {fileID: 3222424741059186186, guid: d9f738784c4e1f74da226493e33f6e71, type: 3}
+  - {fileID: 3222424741059186186, guid: 808e1040b3001ce43aad7260a0433c7f, type: 3}
+  - {fileID: 3222424741059186186, guid: 3ae83d21993a0054caca16e073a12c86, type: 3}
+  - {fileID: 3222424741059186186, guid: 4dabfa8db43b1c54badd83eb08de2690, type: 3}
+  - {fileID: 3222424741059186186, guid: 1a48e33652495be42a6d2afcf3557742, type: 3}
+  - {fileID: 3222424741059186186, guid: 5dc86883cfb9fd5448583ca6d863f721, type: 3}
+  - {fileID: 3222424741059186186, guid: 2cd7d0b617d14194ba96e48ac7a40dfa, type: 3}
+  - {fileID: 3222424741059186186, guid: a923300cea7c6194d909ed9ce481211e, type: 3}
   - {fileID: 3222424741059186186, guid: 48ce9f1defe51c44086d8b8b807a2908, type: 3}
+  - {fileID: 3222424741059186186, guid: 1f08ba8aea5332540b7fb4b2564a831f, type: 3}
+  - {fileID: 3222424741059186186, guid: 44ff63438de3cfd4da3f498252732f8e, type: 3}
+  - {fileID: 3222424741059186186, guid: 5b911e2cea7656b4cb0590bb3fac351c, type: 3}
+  - {fileID: 3222424741059186186, guid: 081756169563ca840ba0703db6f3401c, type: 3}
+  - {fileID: 3222424741059186186, guid: 63112afd910306e4fb1de6cc606fc573, type: 3}
+  - {fileID: 3222424741059186186, guid: 7a7cebc89a2aa5349885cea821e7416a, type: 3}
 --- !u!4 &1189332727
 Transform:
   m_ObjectHideFlags: 0
@@ -1918,6 +1933,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   callWindow: {fileID: 1923725757}
+  delayForNextCall_Offset: 0
   delayForNextCall: 15
   callDuration: 5
   minTraderForCurrentItem: 4
