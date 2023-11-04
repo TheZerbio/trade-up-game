@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     public GameObject callWindow;
 
     [Header("Trader Settings")]
+    public float delayForNextCall_Offset;
     public float delayForNextCall;
     public float callDuration;
     public int minTraderForCurrentItem;
@@ -45,7 +46,7 @@ public class Player : MonoBehaviour
         }
 
         Debug.Log("Zeig nur den 1. Trader in der UI an");
-        StartCoroutine(ShowCallAfterDelay(1, delayForNextCall));
+        StartCoroutine(ShowCallAfterDelay(1, Random.Range(delayForNextCall - delayForNextCall_Offset, delayForNextCall + delayForNextCall_Offset)));
 
         traderPrefabList[currentTraderIndex].SetActive(true);
     }
@@ -57,11 +58,14 @@ public class Player : MonoBehaviour
         traderPrefabList[currentTraderIndex].SetActive(false);
         currentTraderIndex++;
         traderPrefabList[currentTraderIndex].SetActive(true);
+        StartCoroutine(ShowCallAfterDelay(currentTraderIndex + 1, Random.Range(delayForNextCall - delayForNextCall_Offset, delayForNextCall + delayForNextCall_Offset)));
     }
 
     public void RejectCall()
     {
+        StopAllCoroutines();
         Debug.Log("Play New Voice Line");
+        StartCoroutine(ShowCallAfterDelay(currentTraderIndex + 1, Random.Range(delayForNextCall - delayForNextCall_Offset, delayForNextCall + delayForNextCall_Offset)));
     }
 
     private IEnumerator ShowCallAfterDelay(int traderIndex, float delay)
