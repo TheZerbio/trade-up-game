@@ -10,16 +10,13 @@ public class Item : MonoBehaviour
     public Sprite sprite = null;
     public Condition condition = Condition.Normal;
 
-
-    // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
+        sprite = gameObject.GetComponentInChildren<SpriteRenderer>().sprite;
     }
-
-    // Update is called once per frame
-    void Update()
+    public float GetValueByCondition(Condition condition)
     {
-        
+        return baseValue * TradeUpUtility.getConditionModifier(condition);
     }
 
     public float getValue()
