@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     public int minTraderForCurrentItem;
     public int maxTraderForCurrentItem;
     public GameObject traderPrefab;
+    public Transform traderPrefabParent;
     private List<GameObject> traderPrefabList = new List<GameObject>();
     private int numberOfTraders;
 
@@ -22,6 +23,8 @@ public class Player : MonoBehaviour
     public Image itemSpriteSlot;
     public Item myCurrentItem;
 
+
+    private int currentTraderIndex = 0;
 
 
     public void Start()
@@ -36,12 +39,25 @@ public class Player : MonoBehaviour
 
         for(int i = 0; i < numberOfTraders; i++)
         {
-            GameObject trader = Instantiate(traderPrefab);
-            traderPrefabList.Add(trader);
-
-            Debug.Log("Zeig nur den 1. Trader in der UI an");
-            StartCoroutine(ShowCallAfterDelay(1, delayForNextCall));
+            GameObject trader = Instantiate(traderPrefab, traderPrefabParent);
+            trader.SetActive(false);
+            traderPrefabList.Add(trader); 
         }
+
+        Debug.Log("Zeig nur den 1. Trader in der UI an");
+        StartCoroutine(ShowCallAfterDelay(1, delayForNextCall));
+
+        traderPrefabList[currentTraderIndex].SetActive(true);
+    }
+
+    public void ShowNewOffer()
+    {
+
+    }
+
+    public void RejectCall()
+    {
+        Debug.Log("Play New Voice Line");
     }
 
     private IEnumerator ShowCallAfterDelay(int traderIndex, float delay)
