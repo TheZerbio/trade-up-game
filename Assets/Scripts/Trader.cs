@@ -16,7 +16,6 @@ public class Trader : MonoBehaviour
     public Image tradeItemImageSlot;
     public Item traderItem;
     public AudioSource audioSource;
-    public delegate void TagAddedCallback();
 
     private Text interests;
     private int c_tag;

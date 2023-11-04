@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TradeUpUtility
 {
-    public static Tag[] allTags = { Tag.Tech, Tag.Office, Tag.Jewlery, Tag.Jewlery, Tag.Toy, Tag.Utility, Tag.Decoration };
+    public static Tag[] allTags = { Tag.Tech, Tag.Office, Tag.Jewlery, Tag.Jewlery, Tag.Toy, Tag.Utility, Tag.Decoration ,Tag.Antiquities};
     public static Condition[] allConditions = { Condition.Sammler, Condition.Neuwertig, Condition.Normal, Condition.Gebraucht, Condition.Defekt };
     public static string[] traderNames = new string[]{
     "FlohmarktProfi77",
@@ -160,7 +160,7 @@ public class TradeUpUtility
             case Tag.Tech:
                 return "Technik";
             case Tag.Office:
-                return "Büro";
+                return "Buero";
             case Tag.Jewlery:
                 return "Schmuck";
             case Tag.Toy:
@@ -169,6 +169,8 @@ public class TradeUpUtility
                 return "Praktische Sachen";
             case Tag.Decoration:
                 return "Dekorationen";
+            case Tag.Antiquities:
+                return "Antiquitaeten";
             default:
                 return "Unknown Tag";
         }

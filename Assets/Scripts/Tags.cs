@@ -8,6 +8,7 @@ public enum Tag
     Office,
     Jewlery,
     Toy,
+    Antiquities,
     Utility,
     Decoration
 

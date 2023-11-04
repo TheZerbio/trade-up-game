@@ -45,10 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcc50bb8b23c77d49818192277be9960, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tags: 0000000001000000
-  baseValue: 10
-  sprite: {fileID: 21300000, guid: 0eb03bfeb9242304c86035103d81f8c7, type: 3}
-  condition: 4
+  tags: 000000000100000005000000
+  baseValue: 55
+  sprite: {fileID: 0}
+  condition: 2
 --- !u!1 &7826273829531171449
 GameObject:
   m_ObjectHideFlags: 0
