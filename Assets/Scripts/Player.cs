@@ -51,17 +51,17 @@ public class Player : MonoBehaviour
             traderPrefabList.Add(trader); 
         }
 
-        Debug.Log("Zeig nur den 1. Trader in der UI an");
+        //Debug.Log("Zeig nur den 1. Trader in der UI an");
 
         // Mache nur einen Call, wenn man mehr als 1 Angebot in der Warteschlange hat
         if(numberOfTraders > 1)
-            StartCoroutine(ShowCallAfterDelay(1, Random.Range(delayForNextCall - delayForNextCall_Offset, delayForNextCall + delayForNextCall_Offset)));
+            StartCoroutine(ShowCallAfterDelay(0, 3));
 
-        traderPrefabList[currentTraderIndex].SetActive(true);
+        //traderPrefabList[currentTraderIndex].SetActive(true);
 
         // Wenn man nur 1 Angebot hat, dann deaktivier reject-button --> Man muss das Angebot annehmen
-        if (numberOfTraders == 1)
-            rejectTradeButton.interactable = false;
+        //if (numberOfTraders == 1)
+            //rejectTradeButton.interactable = false;
     }
 
     public void ShowNewOffer()
@@ -71,9 +71,17 @@ public class Player : MonoBehaviour
         //voiceClipManager.PlayVoiceLine(traderPrefabList[currentTraderIndex + 1].GetComponent<Trader>());
 
         callWindow.SetActive(false);
-        traderPrefabList[currentTraderIndex].SetActive(false);
-        currentTraderIndex++;
-        traderPrefabList[currentTraderIndex].SetActive(true);
+        if(currentTraderIndex == 0)
+        {
+            traderPrefabList[currentTraderIndex].SetActive(true);
+        }
+        else
+        {
+            traderPrefabList[currentTraderIndex - 1].SetActive(false);
+            //currentTraderIndex++;
+            traderPrefabList[currentTraderIndex].SetActive(true);
+        }
+        
         if (currentTraderIndex + 1 >= traderPrefabList.Count) 
         {
             rejectTradeButton.interactable = false;
@@ -87,7 +95,8 @@ public class Player : MonoBehaviour
         StopAllCoroutines();
         callWindow.SetActive(false);
         Debug.Log("Play New Voice Line");
-        StartCoroutine(ShowCallAfterDelay(currentTraderIndex + 1, Random.Range(delayForNextCall - delayForNextCall_Offset, delayForNextCall + delayForNextCall_Offset)));
+        currentTraderIndex++;
+        StartCoroutine(ShowCallAfterDelay(currentTraderIndex, Random.Range(delayForNextCall - delayForNextCall_Offset, delayForNextCall + delayForNextCall_Offset)));
     }
 
     public void AcceptTrade()
@@ -115,22 +124,29 @@ public class Player : MonoBehaviour
 
     private IEnumerator ShowCallAfterDelay(int traderIndex, float delay)
     {
-        yield return new WaitForSeconds(delay);
+        if (traderIndex == -1)
+        {
 
-        Debug.Log("Show Call");
-
-        callWindow.transform.GetChild(0).GetComponent<Image>().sprite = traderPrefabList[traderIndex].GetComponent<Trader>().profilePicture;
-        callWindow.transform.GetChild(1).GetComponent<TMP_Text>().text = traderPrefabList[traderIndex].GetComponent<Trader>().traderName;
-        callWindow.SetActive(true);
-
-        yield return new WaitForSeconds(callDuration);
-
-        callWindow.SetActive(false);
-
-        if ((traderIndex + 1) < traderPrefabList.Count)
-            StartCoroutine(ShowCallAfterDelay(traderIndex + 1, delayForNextCall));
+        }
         else
-            Debug.Log("No More Offers/Traders");
+        {
+            yield return new WaitForSeconds(delay);
+
+            Debug.Log("Show Call");
+
+            callWindow.transform.GetChild(0).GetComponent<Image>().sprite = traderPrefabList[traderIndex].GetComponent<Trader>().profilePicture;
+            callWindow.transform.GetChild(1).GetComponent<TMP_Text>().text = traderPrefabList[traderIndex].GetComponent<Trader>().traderName;
+            callWindow.SetActive(true);
+
+            yield return new WaitForSeconds(callDuration);
+
+            callWindow.SetActive(false);
+
+            if ((traderIndex + 1) < traderPrefabList.Count)
+                StartCoroutine(ShowCallAfterDelay(traderIndex + 1, delayForNextCall));
+            else
+                Debug.Log("No More Offers/Traders");
+        }
     }
 
     public void UpdateCurrentItem()

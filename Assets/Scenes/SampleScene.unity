@@ -873,7 +873,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &242957634
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1879,7 +1879,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1120718998
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2653,11 +2653,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   voiceClipManager: {fileID: 529177643}
+  numberOfOffers_Text: {fileID: 1323172598}
   callWindow: {fileID: 1923725757}
   acceptTradeButton: {fileID: 1120718999}
   rejectTradeButton: {fileID: 242957635}
   delayForNextCall_Offset: 3
-  delayForNextCall: 15
+  delayForNextCall: 5
   callDuration: 5
   minTraderForCurrentItem: 4
   maxTraderForCurrentItem: 8
