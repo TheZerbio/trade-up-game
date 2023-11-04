@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -38,12 +39,12 @@ public class Player : MonoBehaviour
     public void Start()
     {
         UpdateCurrentItem();
-        GenerateTraderList();
+        GenerateTraderList(true);
     }
 
-    public void GenerateTraderList()
+    public void GenerateTraderList(bool firstItem)
     {
-        numberOfTraders = Random.Range(minTraderForCurrentItem, maxTraderForCurrentItem + 1);
+        numberOfTraders = GetNumberOfTradersBasedOnCurrentItemCondition(firstItem);
         numberOfOffers_Text.text = "Interessenten für dein Produkt: " + numberOfTraders;
 
         for (int i = 0; i < numberOfTraders; i++)
@@ -109,6 +110,8 @@ public class Player : MonoBehaviour
         StopAllCoroutines();
         callWindow.SetActive(false);
         Debug.Log("Play New Voice Line");
+
+        traderPrefabList[currentTraderIndex].GetComponent<Trader>().addInterestTag();
         currentCallIndex++;
 
         // Wenn ich den letzten call gerade abgelehnt habe, dann disable reject button
@@ -145,7 +148,7 @@ public class Player : MonoBehaviour
         rejectTradeButton.gameObject.SetActive(false);
         callWindow.transform.GetChild(3).GetComponent<Button>().interactable = true;
 
-        GenerateTraderList();
+        GenerateTraderList(false);
     }
 
     public void RejectTrade()
@@ -202,7 +205,7 @@ public class Player : MonoBehaviour
 
     public void UpdateCurrentItem()
     {
-        itemSpriteSlot.sprite = myCurrentItem.sprite;
+        itemSpriteSlot.sprite = myCurrentItem.gameObject.GetComponentInChildren<SpriteRenderer>().sprite;
     }
 
     public void ChangeCurrentItem(Item newItem)
@@ -210,5 +213,25 @@ public class Player : MonoBehaviour
         myCurrentItem = newItem;
 
         UpdateCurrentItem();
+    }
+
+    public int GetNumberOfTradersBasedOnCurrentItemCondition(bool firstItem)
+    {
+        if (!firstItem)
+        {
+            switch (myCurrentItem.condition)
+            {
+                case Condition.Sammler: return Random.Range(6, 9); break;
+                case Condition.Neuwertig: return Random.Range(5, 8); break;
+                case Condition.Normal: return Random.Range(4, 7); break;
+                case Condition.Gebraucht: return Random.Range(3, 6); break;
+                case Condition.Defekt: return Random.Range(2, 5); break;
+                default: return Random.Range(2, 9); break;
+            }
+        }
+        else
+        {
+            return Random.Range(4, 7);
+        }
     }
 }

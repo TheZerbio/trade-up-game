@@ -52,7 +52,7 @@ public class Trader : MonoBehaviour
         traderItem = itemPool.GetRandomItemByValue(traderItemValue, 0.9f, 1.1f);
 
         if (traderItem != null)
-            tradeItemImageSlot.sprite = traderItem.sprite;
+            tradeItemImageSlot.sprite = traderItem.gameObject.GetComponentInChildren<SpriteRenderer>().sprite;
 
         
         var Texts = gameObject.GetComponentsInChildren<Text>();
