@@ -17,11 +17,14 @@ public class Trader : MonoBehaviour
     public Item traderItem;
     public AudioSource audioSource;
     public delegate void TagAddedCallback();
+
     private Text interests;
+    private int c_tag;
+    private int cTag = 0;
 
     public void Awake()
     {
-        int c_tag = Random.Range(0, 4);
+        c_tag = Random.Range(0, 4);
         tags = new Tag[c_tag];
         for (int i = 0; i < c_tag; i++)
         {
@@ -64,14 +67,18 @@ public class Trader : MonoBehaviour
             }
             if (Texts[i].gameObject.name.Equals("Interessen"))
             {
-                Texts[i].text = traderName;
+                interests = Texts[i];
             }
         }
     }
 
     public void addInterestTag()
     {
-        //ToDo
+        if (cTag < c_tag)
+        {
+            interests.text += TradeUpUtility.getTagString(tags[cTag])+"  ";
+            cTag++;
+        }
     }
 
     public int getSubjectiveValue(Item item)
