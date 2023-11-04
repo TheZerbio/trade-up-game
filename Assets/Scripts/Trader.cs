@@ -16,6 +16,7 @@ public class Trader : MonoBehaviour
     public Image tradeItemImageSlot;
     public Item traderItem;
     public AudioSource audioSource;
+    public delegate void TagAddedCallback();
 
     public void Awake()
     {
@@ -61,6 +62,11 @@ public class Trader : MonoBehaviour
                 Texts[i].text = traderName;
             }
         }
+    }
+
+    public void addInterestTag()
+    {
+        //ToDo
     }
 
     public int getSubjectiveValue(Item item)

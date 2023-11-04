@@ -152,4 +152,25 @@ public class TradeUpUtility
         int rand = Random.Range(0, traderNames.Length);
         return traderNames[rand];
     }
+
+    public static string getTagString(Tag tag)
+    {
+        switch (tag)
+        {
+            case Tag.Tech:
+                return "Technik";
+            case Tag.Office:
+                return "Büro";
+            case Tag.Jewlery:
+                return "Schmuck";
+            case Tag.Toy:
+                return "Spielzeug";
+            case Tag.Utility:
+                return "Praktische Sachen";
+            case Tag.Decoration:
+                return "Dekorationen";
+            default:
+                return "Unknown Tag";
+        }
+    }
 }
