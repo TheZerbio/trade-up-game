@@ -9,6 +9,8 @@ public class Item : MonoBehaviour
     public float baseValue = 10;
     public Sprite sprite = null;
     public Condition condition = Condition.Normal;
+
+
     // Start is called before the first frame update
     void Start()
     {

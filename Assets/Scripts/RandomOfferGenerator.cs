@@ -6,12 +6,6 @@ using Random = System.Random;
 
 public static class RandomOfferGenerator
 {
-    public static float minEval = 0.5f;
-    public static float maxEval = 1.5f;
-
-    public static float minInformed = 0.05f;
-    public static float maxInformed = 0.4f;
-
     public static int[] GenerateItemValue(int itemValue, int offers, float eval, float informed)
     {
         // Zufallszahlengenerator erstellen
