@@ -48,7 +48,7 @@ public class Trader : MonoBehaviour
 
         int traderItemValue = RandomOfferGenerator.GenerateItemValue(getSubjectiveValue(player.myCurrentItem), philantropy, knowledge);
 
-        traderItem = itemPool.GetRandomItemByValue(traderItemValue);
+        traderItem = itemPool.GetRandomItemByValue(traderItemValue, 0.9f, 1.1f);
 
         if (traderItem != null)
             tradeItemImageSlot.sprite = traderItem.sprite;
