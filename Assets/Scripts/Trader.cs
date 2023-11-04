@@ -14,6 +14,7 @@ public class Trader : MonoBehaviour
     public int stage;
     public Sprite profilePicture;
     public Item traderItem;
+    public Item currentPlayerItem;
     public AudioSource audioSource;
 
     public void Start()
