@@ -15,15 +15,15 @@ public class VoiceClipManager : MonoBehaviour
     public class VoiceClip
     {
         public int voiceType;
-        public int stage;
+        public bool firstCall;
         public float philanthropy;
         public float knowledge;
         public AudioClip audioClip;
 
-        public VoiceClip(int voiceType, int stage, float philanthropy, float knowledge, AudioClip audioClip)
+        public VoiceClip(int voiceType, bool firstCall, float philanthropy, float knowledge, AudioClip audioClip)
         {
             this.voiceType = voiceType;
-            this.stage = stage;
+            this.firstCall = firstCall;
             this.philanthropy = philanthropy;
             this.knowledge = knowledge;
             this.audioClip = audioClip;
@@ -54,8 +54,8 @@ public class VoiceClipManager : MonoBehaviour
 
         for (int i = 0; i < vcs.Length; i++)
         {
-            // filter by stage & voiceType
-            if (vcs[i].stage != trader.stage) break;
+            // filter by firstCall & voiceType
+            if (vcs[i].firstCall != trader.firstCall) break;
             if (vcs[i].voiceType != trader.voiceType) break;
 
             float phildiff = phil - vcs[i].philanthropy;
@@ -91,13 +91,13 @@ public class VoiceClipManager : MonoBehaviour
             // by god lets just hope this works
             int voiceType = Int32.Parse(temp2[0].Substring(1));
 
-            int stage = Int32.Parse(temp2[1].Substring(1));
+            bool firstCall = (Int32.Parse(temp2[1].Substring(1)) == 1);
 
             float philantrophy = float.Parse(temp2[2]);
 
             float knowledge = float.Parse(temp2[3]);
 
-            VoiceClip vc = new VoiceClip(voiceType, stage, philantrophy, knowledge, acs[i]);
+            VoiceClip vc = new VoiceClip(voiceType, firstCall, philantrophy, knowledge, acs[i]);
 
             voiceClips[i] = vc;
         }
