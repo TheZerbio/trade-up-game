@@ -41,13 +41,15 @@ public class Trader : MonoBehaviour
         knowledge = Random.Range(0.1f, 0.4f);           // knowledge = Random.Range(-1.0F, 1.0F);
         traderName = TradeUpUtility.GetRandomUsername();
         starRating = TradeUpUtility.generateStarRating(philantropy, knowledge);
+        firstCall = true;                   // to get the intro voiceline first
+        voiceType = Random.Range(1, 2);     // random person voice
 
         Debug.Log("Player Item Base Value: " + player.myCurrentItem.baseValue);
         Debug.Log("Player Item Subjective Value: " + getSubjectiveValue(player.myCurrentItem));
 
         int traderItemValue = RandomOfferGenerator.GenerateItemValue(getSubjectiveValue(player.myCurrentItem), philantropy, knowledge);
 
-        traderItem = itemPool.GetRandomItemByValue(traderItemValue);
+        traderItem = itemPool.GetRandomItemByValue(traderItemValue, 0.9f, 1.1f);
 
         if (traderItem != null)
             tradeItemImageSlot.sprite = traderItem.sprite;

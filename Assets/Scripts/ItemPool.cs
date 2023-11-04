@@ -6,7 +6,7 @@ public class ItemPool : MonoBehaviour
 {
     public List<GameObject> itemList = new List<GameObject>();
 
-    public Item GetRandomItemByValue(int value)
+    public Item GetRandomItemByValue(int value, float minRange, float maxRange)
     {
         List<GameObject> sammlerItems = new List<GameObject>();
         List<GameObject> neuwertigItems = new List<GameObject>();
@@ -27,7 +27,7 @@ public class ItemPool : MonoBehaviour
 
         foreach (GameObject item in sammlerItems)
         {
-            if((item.GetComponent<Item>().GetValueByCondition(Condition.Sammler) >= value * 0.9f) && (item.GetComponent<Item>().GetValueByCondition(Condition.Sammler) <= value * 1.1f))
+            if((item.GetComponent<Item>().GetValueByCondition(Condition.Sammler) >= value * minRange) && (item.GetComponent<Item>().GetValueByCondition(Condition.Sammler) <= value * maxRange))
             {
                 item.GetComponent<Item>().condition = Condition.Sammler;
                 possibleItems.Add(item.GetComponent<Item>());
@@ -36,7 +36,7 @@ public class ItemPool : MonoBehaviour
 
         foreach (GameObject item in neuwertigItems)
         {
-            if ((item.GetComponent<Item>().GetValueByCondition(Condition.Neuwertig) >= value * 0.9f) && (item.GetComponent<Item>().GetValueByCondition(Condition.Neuwertig) <= value * 1.1f))
+            if ((item.GetComponent<Item>().GetValueByCondition(Condition.Neuwertig) >= value * minRange) && (item.GetComponent<Item>().GetValueByCondition(Condition.Neuwertig) <= value * maxRange))
             {
                 item.GetComponent<Item>().condition = Condition.Neuwertig;
                 possibleItems.Add(item.GetComponent<Item>());
@@ -45,7 +45,7 @@ public class ItemPool : MonoBehaviour
 
         foreach (GameObject item in normalItems)
         {
-            if ((item.GetComponent<Item>().GetValueByCondition(Condition.Normal) >= value * 0.9f) && (item.GetComponent<Item>().GetValueByCondition(Condition.Normal) <= value * 1.1f))
+            if ((item.GetComponent<Item>().GetValueByCondition(Condition.Normal) >= value * minRange) && (item.GetComponent<Item>().GetValueByCondition(Condition.Normal) <= value * maxRange))
             {
                 item.GetComponent<Item>().condition = Condition.Normal;
                 possibleItems.Add(item.GetComponent<Item>());
@@ -54,7 +54,7 @@ public class ItemPool : MonoBehaviour
 
         foreach (GameObject item in gebrauchtItems)
         {
-            if ((item.GetComponent<Item>().GetValueByCondition(Condition.Gebraucht) >= value * 0.9f) && (item.GetComponent<Item>().GetValueByCondition(Condition.Gebraucht) <= value * 1.1f))
+            if ((item.GetComponent<Item>().GetValueByCondition(Condition.Gebraucht) >= value * minRange) && (item.GetComponent<Item>().GetValueByCondition(Condition.Gebraucht) <= value * maxRange))
             {
                 item.GetComponent<Item>().condition = Condition.Gebraucht;
                 possibleItems.Add(item.GetComponent<Item>());
@@ -63,7 +63,7 @@ public class ItemPool : MonoBehaviour
 
         foreach (GameObject item in beschädigtItems)
         {
-            if ((item.GetComponent<Item>().GetValueByCondition(Condition.Defekt) >= value * 0.9f) && (item.GetComponent<Item>().GetValueByCondition(Condition.Defekt) <= value * 1.1f))
+            if ((item.GetComponent<Item>().GetValueByCondition(Condition.Defekt) >= value * minRange) && (item.GetComponent<Item>().GetValueByCondition(Condition.Defekt) <= value * maxRange))
             {
                 item.GetComponent<Item>().condition = Condition.Defekt;
                 possibleItems.Add(item.GetComponent<Item>());
@@ -80,10 +80,9 @@ public class ItemPool : MonoBehaviour
             return possibleItems[Random.Range(0, possibleItems.Count)];
         }
         else
-        {
+        {          
             Debug.Log("No Item Found For Value: " + value);
-            return null;
+            return GetRandomItemByValue(value, minRange - 0.1f, maxRange + 0.1f);
         }
-
     }
 }

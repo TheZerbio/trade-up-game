@@ -2658,9 +2658,9 @@ MonoBehaviour:
   acceptTradeButton: {fileID: 1120718999}
   rejectTradeButton: {fileID: 242957635}
   delayForNextCall_Offset: 3
-  delayForNextCall: 5
-  callDuration: 5
-  minTraderForCurrentItem: 4
+  delayForNextCall: 15
+  callDuration: 6
+  minTraderForCurrentItem: 2
   maxTraderForCurrentItem: 8
   traderPrefab: {fileID: 5687635819337682280, guid: 11815fc233cbcd14e8425ae99f87886e, type: 3}
   traderPrefabParent: {fileID: 818453957}
