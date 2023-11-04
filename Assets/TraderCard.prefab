@@ -293,7 +293,7 @@ MonoBehaviour:
   profilePicture: {fileID: 0}
   traderItem: {fileID: 0}
   currentPlayerItem: {fileID: 0}
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 6961211323429750498}
 --- !u!82 &6961211323429750498
 AudioSource:
   m_ObjectHideFlags: 0

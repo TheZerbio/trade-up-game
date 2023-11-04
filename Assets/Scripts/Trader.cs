@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Trader : MonoBehaviour
 {
@@ -36,6 +37,18 @@ public class Trader : MonoBehaviour
             int y = Random.Range(0, TradeUpUtility.allTags.Length);
             tags[i] = TradeUpUtility.allTags[y];
             Debug.Log("added a Tag");
+        }
+        var Texts = gameObject.GetComponentsInChildren<Text>();
+        for(int i = 0; i < Texts.Length; i++)
+        {
+            if (Texts[i].gameObject.name.Equals("Ranking"))
+            {
+                Texts[i].text = "" + starRating + "/5";
+            }
+            if (Texts[i].gameObject.name.Equals("NamensSchild"))
+            {
+                Texts[i].text = traderName;
+            }
         }
     }
 
