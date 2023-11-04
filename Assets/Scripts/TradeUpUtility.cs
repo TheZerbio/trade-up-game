@@ -128,14 +128,22 @@ public class TradeUpUtility
 
     public static float generateStarRating(float philantropy, float knowledge)
     {
-        float rating = 2.5F;
-        rating += philantropy;
-        rating += knowledge;
-        //Santitze in case of adjustment
-        if (rating < 0)
-            return 0;
-        if (rating > 5)
-            return 5;
+        float rating = 0;
+
+        if (knowledge < 0.2f)
+            rating += 2;
+        else if (knowledge < 0.3f)
+            rating += 1;
+
+        if (philantropy > 1.25f)
+            rating += 3;
+        else if (philantropy > 1.0f)
+            rating += 2;
+        else if (philantropy > 0.75f)
+            rating += 1;
+
+        Debug.Log("Tausche die Grenzen HIER aus, falls minEval, maxEval, minInformed oder maxInformed verändert wurden");
+
         return rating;
     }
 
