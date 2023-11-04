@@ -11,6 +11,7 @@ public class Trader : MonoBehaviour
     public float starRating = 2.5F;
     public string traderName = "DefaultName";
     public int voiceType;
+    public int stage;
     public Sprite profilePicture;
     public Item traderItem;
     public Item currentPlayerItem;
