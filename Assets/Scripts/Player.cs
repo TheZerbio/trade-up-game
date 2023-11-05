@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     public VoiceClipManager voiceClipManager;
     public Text numberOfOffers_Text;
     public Canvas gameoverCanvas;
+    public AudioSource tutorialSource;
 
     [Header("Call Settings")]
     public GameObject callWindow;
@@ -105,31 +106,33 @@ public class Player : MonoBehaviour
         {          
             callWindow.transform.GetChild(2).GetComponent<Button>().interactable = false;
             callWindow.GetComponent<Animator>().enabled = false;
-            Debug.Log("Play Tutorial Voice Line");
-            StartCoroutine(Delay(90));
+
+            tutorialSource.Play();
+
+            StartCoroutine(Delay(tutorialSource.clip.length));
         }
         else
         {
             StopAllCoroutines();
 
-        remaining0ffers--;
-        numberOfOffers_Text.text = "Interessenten: " + remaining0ffers;
+            remaining0ffers--;
+            numberOfOffers_Text.text = "Interessenten: " + remaining0ffers;
 
             callWindow.SetActive(false);
 
             currentTraderIndex = currentCallIndex;
 
-        Trader activeTrader = traderPrefabList[currentTraderIndex].GetComponent<Trader>();
+            Trader activeTrader = traderPrefabList[currentTraderIndex].GetComponent<Trader>();
 
-        // play random opening line
-        voiceClipManager.PlayVoiceLine(activeTrader);
-        // disable opening lines from same trader
-        activeTrader.stage++;
+            // play random opening line
+            voiceClipManager.PlayVoiceLine(activeTrader);
+            // disable opening lines from same trader
+            activeTrader.stage++;
 
-        if (!activeOffer)
-        {
-            acceptTradeButton.gameObject.SetActive(true);
-            rejectTradeButton.gameObject.SetActive(true);
+            if (!activeOffer)
+            {
+                acceptTradeButton.gameObject.SetActive(true);
+                rejectTradeButton.gameObject.SetActive(true);
 
                 traderPrefabList[currentTraderIndex].SetActive(true);
                 activeOffer = true;
@@ -160,6 +163,7 @@ public class Player : MonoBehaviour
         if (tutorialCall)
         {
             StopAllCoroutines();
+            tutorialSource.Stop();
             callWindow.transform.GetChild(2).GetComponent<Button>().interactable = true;
             tutorialCall = false;
             callWindow.SetActive(false);
