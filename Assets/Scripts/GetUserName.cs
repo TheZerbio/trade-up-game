@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GetUserName : MonoBehaviour
 {
@@ -11,6 +12,6 @@ public class GetUserName : MonoBehaviour
     void Start()
     {
         username = System.Environment.UserName;
-        this.GetComponent<TMP_Text>().text = username;
+        this.GetComponent<Text>().text = username;
     }
 }

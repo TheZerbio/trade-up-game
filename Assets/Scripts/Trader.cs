@@ -39,7 +39,7 @@ public class Trader : MonoBehaviour
 
         //Initialise Local Variables
         audioSource = gameObject.GetComponent<AudioSource>();
-        philantropy = Random.Range(0.5f, 1.5f);         // philantropy = Random.Range(-1.0F, 1.0F);
+        philantropy = Random.Range(0.5f, 1.5f);    // Random.Range(2.0f, 5.0f);     // philantropy = Random.Range(-1.0F, 1.0F);
         knowledge = Random.Range(0.1f, 0.4f);           // knowledge = Random.Range(-1.0F, 1.0F);
         traderName = TradeUpUtility.GetRandomUsername();
         starRating = TradeUpUtility.generateStarRating(philantropy, knowledge);
@@ -49,13 +49,13 @@ public class Trader : MonoBehaviour
         //Debug.Log("Player Item Base Value: " + player.myCurrentItem.baseValue);
         //Debug.Log("Player Item Subjective Value: " + getSubjectiveValue(player.myCurrentItem));
 
-        int traderItemValue = RandomOfferGenerator.GenerateItemValue(getSubjectiveValue(player.myCurrentItem), philantropy, knowledge);
+        float traderItemValue = RandomOfferGenerator.GenerateItemValue(getSubjectiveValue(player.myCurrentItem), philantropy, knowledge);
 
         itemStorage = itemPool.GetRandomItemByValue(traderItemValue, 0.9f, 1.1f);
 
         //traderItem = itemPool.GetRandomItemByValue(traderItemValue, 0.9f, 1.1f);
 
-        Debug.Log("TraderItem Name: " + itemStorage.name + " | Condition: " + itemStorage.condition);
+        //Debug.Log("TraderItem Name: " + itemStorage.name + " | Condition: " + itemStorage.condition);
 
         if (itemStorage != null)
             tradeItemImageSlot.sprite = itemStorage.sprite; //.gameObject.GetComponentInChildren<SpriteRenderer>().sprite;
@@ -80,6 +80,10 @@ public class Trader : MonoBehaviour
             {
                 zustand = Texts[i];
                 zustand.text = TradeUpUtility.getConditionString(itemStorage.condition);
+            }
+            if (Texts[i].gameObject.name.Equals("ItemName"))
+            {
+                Texts[i].text = itemStorage.name;
             }
         }
     }

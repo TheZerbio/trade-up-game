@@ -1,7 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Audio/Geräusche.meta
 guid: 7285929715f725a4bb69cb6039b1f1c9
 folderAsset: yes
 DefaultImporter:
+========
+guid: caa955c254579db49ad3f0ae515b2e54
+PrefabImporter:
+>>>>>>>> main:Assets/ItemPrefabs/Antike Vase.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

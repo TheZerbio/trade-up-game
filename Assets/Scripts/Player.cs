@@ -8,33 +8,41 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     public VoiceClipManager voiceClipManager;
-    public TMP_Text numberOfOffers_Text;
+    public Text numberOfOffers_Text;
+    public Canvas gameoverCanvas;
 
     [Header("Call Settings")]
     public GameObject callWindow;
+    public float delayForNextCall_Offset;
+    public float delayForNextCall;
+    public float callDuration;
 
     [Header("Trader Settings")]
     public Button acceptTradeButton;
     public Button rejectTradeButton;
-    public float delayForNextCall_Offset;
-    public float delayForNextCall;
-    public float callDuration;
-    public int minTraderForCurrentItem;
-    public int maxTraderForCurrentItem;
+    private int minTraderForCurrentItem;
+    private int maxTraderForCurrentItem;
     public GameObject traderPrefab;
-    public Transform traderPrefabParent;
-    public List<GameObject> traderPrefabList = new List<GameObject>();
-    private int numberOfTraders;
-    public bool activeOffer = false;
+    public Transform traderPrefabParent;   
+    private int numberOfTraders; 
 
     [Header("Player Item")]
     public Image itemSpriteSlot;
-    public ItemStorage myCurrentItem;
+    public Text itemNameText;
+    public Text itemConditionText;
+    public Text itemTagsText;
     public Item startItem;
+    public GameObject targetItem;
 
+    [Header("Debug Variables (Don't Set!!)")]
+    public List<GameObject> traderPrefabList = new List<GameObject>();
+    public ItemStorage myCurrentItem;
+    public int currentCallIndex = 0;
+    public bool activeOffer = false;
 
     private int currentTraderIndex = 0;
-    public int currentCallIndex = 0;
+    private int remaining0ffers = 0;
+    
 
 
     public void Start()
@@ -47,7 +55,8 @@ public class Player : MonoBehaviour
     public void GenerateTraderList(bool firstItem)
     {
         numberOfTraders = GetNumberOfTradersBasedOnCurrentItemCondition(firstItem);
-        numberOfOffers_Text.text = "Interessenten für dein Produkt: " + numberOfTraders;
+        remaining0ffers = numberOfTraders;
+        numberOfOffers_Text.text = "Interessenten: " + remaining0ffers;
 
         for (int i = 0; i < numberOfTraders; i++)
         {
@@ -73,6 +82,9 @@ public class Player : MonoBehaviour
     public void ShowNewOffer()
     {
         StopAllCoroutines();
+
+        remaining0ffers--;
+        numberOfOffers_Text.text = "Interessenten: " + remaining0ffers;
 
         callWindow.SetActive(false);
 
@@ -129,6 +141,9 @@ public class Player : MonoBehaviour
 
         currentCallIndex++;
 
+        remaining0ffers--;
+        numberOfOffers_Text.text = "Interessenten: " + remaining0ffers;
+
         // Wenn ich den letzten call gerade abgelehnt habe, dann disable reject button
         if (currentCallIndex >= traderPrefabList.Count)
         {
@@ -165,7 +180,28 @@ public class Player : MonoBehaviour
         rejectTradeButton.gameObject.SetActive(false);
         callWindow.transform.GetChild(3).GetComponent<Button>().interactable = true;
 
-        GenerateTraderList(false);
+        bool winning = CheckWinningCondition();
+
+        if (!winning)
+            GenerateTraderList(false);
+        else
+        {
+            numberOfOffers_Text.text = "Du hast gewonnen!";           
+            StartCoroutine(DisplayWinningScreen());
+        }
+    }
+
+    private IEnumerator DisplayWinningScreen()
+    {
+        yield return new WaitForSeconds(3);
+        gameoverCanvas.gameObject.SetActive(true);
+    }
+
+    public bool CheckWinningCondition()
+    {
+        if(myCurrentItem.name == targetItem.name)
+            return true;
+        return false;
     }
 
     public void RejectTrade()
@@ -176,7 +212,7 @@ public class Player : MonoBehaviour
         rejectTradeButton.gameObject.SetActive(false);
 
         traderPrefabList[currentTraderIndex].SetActive(false);
-        ShowCallAfterDelay(3);
+        StartCoroutine(ShowCallAfterDelay(3));
     }
 
     private IEnumerator ShowCallAfterDelay(float delay)
@@ -194,11 +230,16 @@ public class Player : MonoBehaviour
             callWindow.transform.GetChild(3).GetComponent<Button>().interactable = false;
         }
 
-        callWindow.transform.GetChild(0).GetComponent<Image>().sprite = traderPrefabList[currentCallIndex].GetComponent<Trader>().profilePicture;
-        callWindow.transform.GetChild(1).GetComponent<TMP_Text>().text = traderPrefabList[currentCallIndex].GetComponent<Trader>().traderName;
+        //callWindow.transform.GetChild(0).GetComponent<Image>().sprite = traderPrefabList[currentCallIndex].GetComponent<Trader>().profilePicture;
+        callWindow.transform.GetChild(1).GetComponent<Text>().text = traderPrefabList[currentCallIndex].GetComponent<Trader>().traderName;
         callWindow.SetActive(true);
 
         yield return new WaitForSeconds(callDuration);
+
+        remaining0ffers--;
+        numberOfOffers_Text.text = "Interessenten: " + remaining0ffers;
+
+        traderPrefabList[currentTraderIndex].GetComponent<Trader>().addInterestTag();
 
         // play next voice-line of active trader if there is an active trader
         if (activeOffer)
@@ -229,6 +270,13 @@ public class Player : MonoBehaviour
     public void UpdateCurrentItem()
     {
         itemSpriteSlot.sprite = myCurrentItem.sprite; //.GetComponentInChildren<SpriteRenderer>().sprite;
+        itemNameText.text = myCurrentItem.name;
+        itemConditionText.text = TradeUpUtility.getConditionString(myCurrentItem.condition);
+
+        foreach(Tag t in myCurrentItem.tags)
+        {
+            itemTagsText.text = TradeUpUtility.getTagString(t) + "\n";
+        }      
     }
 
     public void ChangeCurrentItem(ItemStorage newItem)

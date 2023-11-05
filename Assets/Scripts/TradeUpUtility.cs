@@ -160,19 +160,19 @@ public class TradeUpUtility
             case Tag.Tech:
                 return "Technik";
             case Tag.Office:
-                return "Buero";
+                return "Büro";
             case Tag.Jewlery:
                 return "Schmuck";
             case Tag.Toy:
                 return "Spielzeug";
             case Tag.Utility:
-                return "Praktische Sachen";
+                return "Praktisch";
             case Tag.Decoration:
-                return "Dekorationen";
+                return "Dekoration";
             case Tag.Antiquities:
-                return "Antiquitaeten";
+                return "Antiquität";
             default:
-                return "Unknown Tag";
+                return "";
         }
     }
 
@@ -189,7 +189,7 @@ public class TradeUpUtility
             case Condition.Gebraucht:
                 return "Gebraucht";
             case Condition.Defekt:
-                return "Defekt";
+                return "Beschädigt";
             default:
                 return "Unbekannt";
         }
