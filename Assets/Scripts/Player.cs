@@ -29,7 +29,8 @@ public class Player : MonoBehaviour
 
     [Header("Player Item")]
     public Image itemSpriteSlot;
-    public Item myCurrentItem;
+    public ItemStorage myCurrentItem;
+    public Item startItem;
 
 
     private int currentTraderIndex = 0;
@@ -38,6 +39,7 @@ public class Player : MonoBehaviour
 
     public void Start()
     {
+        myCurrentItem = new ItemStorage(startItem.name, Condition.Normal, startItem.GetComponentInChildren<SpriteRenderer>().sprite, startItem.baseValue, startItem.tags);
         UpdateCurrentItem();
         GenerateTraderList(true);
     }
@@ -50,6 +52,7 @@ public class Player : MonoBehaviour
         for (int i = 0; i < numberOfTraders; i++)
         {
             GameObject trader = Instantiate(traderPrefab, traderPrefabParent);
+            trader.GetComponent<Trader>().InitTrader();
             trader.SetActive(false);
             traderPrefabList.Add(trader); 
         }
@@ -135,7 +138,9 @@ public class Player : MonoBehaviour
     public void AcceptTrade()
     {
         StopAllCoroutines();
-        myCurrentItem = traderPrefabList[currentTraderIndex].GetComponent<Trader>().traderItem;
+        myCurrentItem = traderPrefabList[currentTraderIndex].GetComponent<Trader>().itemStorage;
+
+        Debug.Log("My Current Item Condition: " + myCurrentItem.condition + " | Current Trader Index: " + currentTraderIndex);
 
         activeOffer = false;
 
@@ -210,10 +215,10 @@ public class Player : MonoBehaviour
 
     public void UpdateCurrentItem()
     {
-        itemSpriteSlot.sprite = myCurrentItem.gameObject.GetComponentInChildren<SpriteRenderer>().sprite;
+        itemSpriteSlot.sprite = myCurrentItem.sprite; //.GetComponentInChildren<SpriteRenderer>().sprite;
     }
 
-    public void ChangeCurrentItem(Item newItem)
+    public void ChangeCurrentItem(ItemStorage newItem)
     {
         myCurrentItem = newItem;
 
