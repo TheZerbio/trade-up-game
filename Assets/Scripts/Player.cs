@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
     public bool activeOffer = false;
 
     private int currentTraderIndex = 0;
+    private int remaining0ffers = 0;
     
 
 
@@ -50,7 +51,8 @@ public class Player : MonoBehaviour
     public void GenerateTraderList(bool firstItem)
     {
         numberOfTraders = GetNumberOfTradersBasedOnCurrentItemCondition(firstItem);
-        numberOfOffers_Text.text = "Interessenten für dein Produkt: " + numberOfTraders;
+        remaining0ffers = numberOfTraders;
+        numberOfOffers_Text.text = "Interessenten für dein Produkt: " + remaining0ffers;
 
         for (int i = 0; i < numberOfTraders; i++)
         {
@@ -78,6 +80,9 @@ public class Player : MonoBehaviour
         StopAllCoroutines();
 
         //voiceClipManager.PlayVoiceLine(traderPrefabList[currentTraderIndex + 1].GetComponent<Trader>());
+
+        remaining0ffers--;
+        numberOfOffers_Text.text = "Interessenten für dein Produkt: " + remaining0ffers;
 
         callWindow.SetActive(false);
 
@@ -120,6 +125,9 @@ public class Player : MonoBehaviour
         traderPrefabList[currentTraderIndex].GetComponent<Trader>().addInterestTag();
         currentCallIndex++;
 
+        remaining0ffers--;
+        numberOfOffers_Text.text = "Interessenten für dein Produkt: " + remaining0ffers;
+
         // Wenn ich den letzten call gerade abgelehnt habe, dann disable reject button
         if (currentCallIndex >= traderPrefabList.Count)
         {
@@ -161,7 +169,10 @@ public class Player : MonoBehaviour
         if (!winning)
             GenerateTraderList(false);
         else
+        {
+            numberOfOffers_Text.text = "Du hast gewonnen!";
             Debug.Log("WIIIIINNNNNN !!!!");
+        }
     }
 
     public bool CheckWinningCondition()
@@ -200,6 +211,9 @@ public class Player : MonoBehaviour
         callWindow.SetActive(true);
 
         yield return new WaitForSeconds(callDuration);
+
+        remaining0ffers--;
+        numberOfOffers_Text.text = "Interessenten für dein Produkt: " + remaining0ffers;
 
         if (lastCall)
         {

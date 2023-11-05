@@ -81,6 +81,10 @@ public class Trader : MonoBehaviour
                 zustand = Texts[i];
                 zustand.text = TradeUpUtility.getConditionString(itemStorage.condition);
             }
+            if (Texts[i].gameObject.name.Equals("ItemName"))
+            {
+                Texts[i].text = itemStorage.name;
+            }
         }
     }
 

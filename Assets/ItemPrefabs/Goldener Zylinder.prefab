@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7036155722132391759}
   - component: {fileID: 7977582194799403671}
   m_Layer: 0
-  m_Name: Pencil
+  m_Name: Goldener Zylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,10 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcc50bb8b23c77d49818192277be9960, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tags: 0500000001000000
-  baseValue: 5
+  tags: 00000000020000000500000004000000
+  baseValue: 100
   sprite: {fileID: 0}
-  condition: 2
+  condition: 0
 --- !u!1 &7826273829531171449
 GameObject:
   m_ObjectHideFlags: 0
@@ -122,7 +122,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e9f01968da6297642b76fbaf8fd9303d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c4fbe6cee8d7f3e4f8856885d9936ef5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7036155722132391759}
   - component: {fileID: 7977582194799403671}
   m_Layer: 0
-  m_Name: GoldenTophat
+  m_Name: "Flei\xDFsternchen"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,10 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcc50bb8b23c77d49818192277be9960, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tags: 00000000020000000500000004000000
-  baseValue: 100
+  tags: 06000000
+  baseValue: 20
   sprite: {fileID: 0}
-  condition: 0
+  condition: 2
 --- !u!1 &7826273829531171449
 GameObject:
   m_ObjectHideFlags: 0
@@ -122,7 +122,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c4fbe6cee8d7f3e4f8856885d9936ef5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a968179a7dbb0034ba605d2369a05c5b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
