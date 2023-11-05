@@ -6,7 +6,7 @@ using Random = System.Random;
 
 public static class RandomOfferGenerator
 {
-    public static float GenerateItemValue(float itemValue, float eval, float informed)
+    public static int GenerateItemValue(int itemValue, float eval, float informed)
     {
         // Zufallszahlengenerator erstellen
         Random random = new Random();
@@ -29,8 +29,7 @@ public static class RandomOfferGenerator
 
         //Debug.Log("Generated Item Value: " + Mathf.RoundToInt((float)randomNumber));
 
-        return (float)randomNumber;
-        //return Mathf.RoundToInt((float)randomNumber);
+        return Mathf.RoundToInt((float)randomNumber);
     }
 
     static double GenerateRandomNumberFromNormalDistribution(double mean, double stdDev, Random random)

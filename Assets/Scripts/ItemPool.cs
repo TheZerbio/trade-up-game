@@ -6,7 +6,7 @@ public class ItemPool : MonoBehaviour
 {
     public List<GameObject> itemList = new List<GameObject>();
 
-    public ItemStorage GetRandomItemByValue(float value, float minRange, float maxRange)
+    public ItemStorage GetRandomItemByValue(int value, float minRange, float maxRange)
     {
         List<GameObject> sammlerItems = new List<GameObject>();
         List<GameObject> neuwertigItems = new List<GameObject>();
@@ -89,7 +89,7 @@ public class ItemPool : MonoBehaviour
         else
         {          
             Debug.Log("No Item Found For Value: " + value);
-            return GetRandomItemByValue(value, minRange - 0.05f, maxRange + 0.05f);
+            return GetRandomItemByValue(value, minRange - 0.1f, maxRange + 0.1f);
         }
     }
 }

@@ -49,13 +49,13 @@ public class Trader : MonoBehaviour
         //Debug.Log("Player Item Base Value: " + player.myCurrentItem.baseValue);
         //Debug.Log("Player Item Subjective Value: " + getSubjectiveValue(player.myCurrentItem));
 
-        float traderItemValue = RandomOfferGenerator.GenerateItemValue(getSubjectiveValue(player.myCurrentItem), philantropy, knowledge);
+        int traderItemValue = RandomOfferGenerator.GenerateItemValue(getSubjectiveValue(player.myCurrentItem), philantropy, knowledge);
 
         itemStorage = itemPool.GetRandomItemByValue(traderItemValue, 0.9f, 1.1f);
 
         //traderItem = itemPool.GetRandomItemByValue(traderItemValue, 0.9f, 1.1f);
 
-        //Debug.Log("TraderItem Name: " + itemStorage.name + " | Condition: " + itemStorage.condition);
+        Debug.Log("TraderItem Name: " + itemStorage.name + " | Condition: " + itemStorage.condition);
 
         if (itemStorage != null)
             tradeItemImageSlot.sprite = itemStorage.sprite; //.gameObject.GetComponentInChildren<SpriteRenderer>().sprite;
@@ -80,10 +80,6 @@ public class Trader : MonoBehaviour
             {
                 zustand = Texts[i];
                 zustand.text = TradeUpUtility.getConditionString(itemStorage.condition);
-            }
-            if (Texts[i].gameObject.name.Equals("ItemName"))
-            {
-                Texts[i].text = itemStorage.name;
             }
         }
     }
