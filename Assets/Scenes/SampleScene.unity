@@ -278,7 +278,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Reject Trade
+  m_Text: Ablehnen
 --- !u!222 &19567824
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1805,7 +1805,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Accept Trade
+  m_Text: Annehmen
 --- !u!222 &1109127056
 CanvasRenderer:
   m_ObjectHideFlags: 0
