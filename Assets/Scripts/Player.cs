@@ -8,33 +8,37 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     public VoiceClipManager voiceClipManager;
-    public TMP_Text numberOfOffers_Text;
+    public Text numberOfOffers_Text;
 
     [Header("Call Settings")]
     public GameObject callWindow;
+    public float delayForNextCall_Offset;
+    public float delayForNextCall;
+    public float callDuration;
 
     [Header("Trader Settings")]
     public Button acceptTradeButton;
     public Button rejectTradeButton;
-    public float delayForNextCall_Offset;
-    public float delayForNextCall;
-    public float callDuration;
-    public int minTraderForCurrentItem;
-    public int maxTraderForCurrentItem;
+    private int minTraderForCurrentItem;
+    private int maxTraderForCurrentItem;
     public GameObject traderPrefab;
-    public Transform traderPrefabParent;
-    public List<GameObject> traderPrefabList = new List<GameObject>();
-    private int numberOfTraders;
-    public bool activeOffer = false;
+    public Transform traderPrefabParent;   
+    private int numberOfTraders; 
 
     [Header("Player Item")]
     public Image itemSpriteSlot;
-    public ItemStorage myCurrentItem;
     public Item startItem;
+    public Item targetItem;
 
+    [Header("Debug Variables (Don't Set!!)")]
+    public List<GameObject> traderPrefabList = new List<GameObject>();
+    public ItemStorage myCurrentItem;
+    public int currentCallIndex = 0;
+    public bool activeOffer = false;
 
     private int currentTraderIndex = 0;
-    public int currentCallIndex = 0;
+    private int remaining0ffers = 0;
+    
 
 
     public void Start()
@@ -47,7 +51,8 @@ public class Player : MonoBehaviour
     public void GenerateTraderList(bool firstItem)
     {
         numberOfTraders = GetNumberOfTradersBasedOnCurrentItemCondition(firstItem);
-        numberOfOffers_Text.text = "Interessenten für dein Produkt: " + numberOfTraders;
+        remaining0ffers = numberOfTraders;
+        numberOfOffers_Text.text = "Interessenten für dein Produkt: " + remaining0ffers;
 
         for (int i = 0; i < numberOfTraders; i++)
         {
@@ -73,7 +78,9 @@ public class Player : MonoBehaviour
     public void ShowNewOffer()
     {
         StopAllCoroutines();
-
+       
+        remaining0ffers--;
+        numberOfOffers_Text.text = "Interessenten für dein Produkt: " + remaining0ffers;
         callWindow.SetActive(false);
 
         currentTraderIndex = currentCallIndex;
@@ -125,6 +132,9 @@ public class Player : MonoBehaviour
 
         currentCallIndex++;
 
+        remaining0ffers--;
+        numberOfOffers_Text.text = "Interessenten für dein Produkt: " + remaining0ffers;
+
         // Wenn ich den letzten call gerade abgelehnt habe, dann disable reject button
         if (currentCallIndex >= traderPrefabList.Count)
         {
@@ -161,7 +171,22 @@ public class Player : MonoBehaviour
         rejectTradeButton.gameObject.SetActive(false);
         callWindow.transform.GetChild(3).GetComponent<Button>().interactable = true;
 
-        GenerateTraderList(false);
+        bool winning = CheckWinningCondition();
+
+        if (!winning)
+            GenerateTraderList(false);
+        else
+        {
+            numberOfOffers_Text.text = "Du hast gewonnen!";
+            Debug.Log("WIIIIINNNNNN !!!!");
+        }
+    }
+
+    public bool CheckWinningCondition()
+    {
+        if(myCurrentItem.name == targetItem.name)
+            return true;
+        return false;
     }
 
     public void RejectTrade()
@@ -188,11 +213,14 @@ public class Player : MonoBehaviour
             callWindow.transform.GetChild(3).GetComponent<Button>().interactable = false;
         }
 
-        callWindow.transform.GetChild(0).GetComponent<Image>().sprite = traderPrefabList[currentCallIndex].GetComponent<Trader>().profilePicture;
-        callWindow.transform.GetChild(1).GetComponent<TMP_Text>().text = traderPrefabList[currentCallIndex].GetComponent<Trader>().traderName;
+        //callWindow.transform.GetChild(0).GetComponent<Image>().sprite = traderPrefabList[currentCallIndex].GetComponent<Trader>().profilePicture;
+        callWindow.transform.GetChild(1).GetComponent<Text>().text = traderPrefabList[currentCallIndex].GetComponent<Trader>().traderName;
         callWindow.SetActive(true);
 
         yield return new WaitForSeconds(callDuration);
+
+        remaining0ffers--;
+        numberOfOffers_Text.text = "Interessenten für dein Produkt: " + remaining0ffers;
 
         if (lastCall)
         {
