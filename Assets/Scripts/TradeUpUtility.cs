@@ -189,7 +189,7 @@ public class TradeUpUtility
             case Condition.Gebraucht:
                 return "Gebraucht";
             case Condition.Defekt:
-                return "Gebraucht";
+                return "Defekt";
             default:
                 return "Unbekannt";
         }

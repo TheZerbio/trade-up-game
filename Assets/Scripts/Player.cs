@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
 
     [Header("Player Item")]
     public Image itemSpriteSlot;
-    public Item myCurrentItem;
+    public ItemStorage myCurrentItem;
 
 
     private int currentTraderIndex = 0;
@@ -50,6 +50,7 @@ public class Player : MonoBehaviour
         for (int i = 0; i < numberOfTraders; i++)
         {
             GameObject trader = Instantiate(traderPrefab, traderPrefabParent);
+            trader.GetComponent<Trader>().InitTrader();
             trader.SetActive(false);
             traderPrefabList.Add(trader); 
         }
@@ -127,7 +128,9 @@ public class Player : MonoBehaviour
     public void AcceptTrade()
     {
         StopAllCoroutines();
-        myCurrentItem = traderPrefabList[currentTraderIndex].GetComponent<Trader>().traderItem;
+        myCurrentItem = traderPrefabList[currentTraderIndex].GetComponent<Trader>().itemStorage;
+
+        Debug.Log("My Current Item Condition: " + myCurrentItem.condition + " | Current Trader Index: " + currentTraderIndex);
 
         activeOffer = false;
 
@@ -202,10 +205,10 @@ public class Player : MonoBehaviour
 
     public void UpdateCurrentItem()
     {
-        itemSpriteSlot.sprite = myCurrentItem.gameObject.GetComponentInChildren<SpriteRenderer>().sprite;
+        itemSpriteSlot.sprite = myCurrentItem.sprite; //.GetComponentInChildren<SpriteRenderer>().sprite;
     }
 
-    public void ChangeCurrentItem(Item newItem)
+    public void ChangeCurrentItem(ItemStorage newItem)
     {
         myCurrentItem = newItem;
 
@@ -218,12 +221,12 @@ public class Player : MonoBehaviour
         {
             switch (myCurrentItem.condition)
             {
-                case Condition.Sammler: return Random.Range(6, 9); break;
-                case Condition.Neuwertig: return Random.Range(5, 8); break;
-                case Condition.Normal: return Random.Range(4, 7); break;
-                case Condition.Gebraucht: return Random.Range(3, 6); break;
-                case Condition.Defekt: return Random.Range(2, 5); break;
-                default: return Random.Range(2, 9); break;
+                case Condition.Sammler: return Random.Range(6, 9);
+                case Condition.Neuwertig: return Random.Range(5, 8);
+                case Condition.Normal: return Random.Range(4, 7);
+                case Condition.Gebraucht: return Random.Range(3, 6);
+                case Condition.Defekt: return Random.Range(2, 5);
+                default: return Random.Range(2, 9);
             }
         }
         else

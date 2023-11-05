@@ -14,7 +14,8 @@ public class Trader : MonoBehaviour
     public bool firstCall;
     public Sprite profilePicture;
     public Image tradeItemImageSlot;
-    public Item traderItem;
+    //public Item traderItem;
+    public ItemStorage itemStorage;
     public AudioSource audioSource;
 
     private Text interests;
@@ -22,7 +23,7 @@ public class Trader : MonoBehaviour
     private int c_tag;
     private int cTag = 0;
 
-    public void Awake()
+    public void InitTrader()
     {
         c_tag = Random.Range(0, 4);
         tags = new Tag[c_tag];
@@ -30,7 +31,7 @@ public class Trader : MonoBehaviour
         {
             int y = Random.Range(0, TradeUpUtility.allTags.Length);
             tags[i] = TradeUpUtility.allTags[y];
-            Debug.Log("added a Tag");
+            //Debug.Log("added a Tag");
         }
 
         Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
@@ -45,15 +46,19 @@ public class Trader : MonoBehaviour
         firstCall = true;                   // to get the intro voiceline first
         voiceType = Random.Range(1, 2);     // random person voice
 
-        Debug.Log("Player Item Base Value: " + player.myCurrentItem.baseValue);
-        Debug.Log("Player Item Subjective Value: " + getSubjectiveValue(player.myCurrentItem));
+        //Debug.Log("Player Item Base Value: " + player.myCurrentItem.baseValue);
+        //Debug.Log("Player Item Subjective Value: " + getSubjectiveValue(player.myCurrentItem));
 
         int traderItemValue = RandomOfferGenerator.GenerateItemValue(getSubjectiveValue(player.myCurrentItem), philantropy, knowledge);
 
-        traderItem = itemPool.GetRandomItemByValue(traderItemValue, 0.9f, 1.1f);
+        itemStorage = itemPool.GetRandomItemByValue(traderItemValue, 0.9f, 1.1f);
 
-        if (traderItem != null)
-            tradeItemImageSlot.sprite = traderItem.gameObject.GetComponentInChildren<SpriteRenderer>().sprite;
+        //traderItem = itemPool.GetRandomItemByValue(traderItemValue, 0.9f, 1.1f);
+
+        Debug.Log("TraderItem Name: " + itemStorage.name + " | Condition: " + itemStorage.condition);
+
+        if (itemStorage != null)
+            tradeItemImageSlot.sprite = itemStorage.sprite; //.gameObject.GetComponentInChildren<SpriteRenderer>().sprite;
 
         
         var Texts = gameObject.GetComponentsInChildren<Text>();
@@ -74,7 +79,7 @@ public class Trader : MonoBehaviour
             if (Texts[i].gameObject.name.Equals("Zustand"))
             {
                 zustand = Texts[i];
-                zustand.text = TradeUpUtility.getConditionString(traderItem.condition);
+                zustand.text = TradeUpUtility.getConditionString(itemStorage.condition);
             }
         }
     }
@@ -88,7 +93,7 @@ public class Trader : MonoBehaviour
         }
     }
 
-    public int getSubjectiveValue(Item item)
+    public int getSubjectiveValue(ItemStorage item)
     {
         float intrestModifier = 1.0F;
         for (int i = 0; i < tags.Length; i++)

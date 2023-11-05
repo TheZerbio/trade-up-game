@@ -17,8 +17,8 @@ public static class RandomOfferGenerator
         double expectedItemValue = eval * itemValue;
         double expectedDeviation = informed * expectedItemValue;
 
-        Debug.Log("Eval Value: " + eval.ToString("F2"));
-        Debug.Log("Informed Value: " + informed.ToString("F2"));
+        //Debug.Log("Eval Value: " + eval.ToString("F2"));
+        //Debug.Log("Informed Value: " + informed.ToString("F2"));
 
         double randomNumber = GenerateRandomNumberFromNormalDistribution(expectedItemValue, expectedDeviation, random);
 
@@ -27,7 +27,7 @@ public static class RandomOfferGenerator
             randomNumber = GenerateRandomNumberFromNormalDistribution(expectedItemValue, expectedDeviation, random);
         }
 
-        Debug.Log("Generated Item Value: " + Mathf.RoundToInt((float)randomNumber));
+        //Debug.Log("Generated Item Value: " + Mathf.RoundToInt((float)randomNumber));
 
         return Mathf.RoundToInt((float)randomNumber);
     }
