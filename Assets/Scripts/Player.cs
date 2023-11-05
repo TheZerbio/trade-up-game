@@ -200,9 +200,12 @@ public class Player : MonoBehaviour
 
         yield return new WaitForSeconds(callDuration);
 
-        // play next voice-line of active trader
-        voiceClipManager.PlayVoiceLine(activeTrader);
-        activeTrader.stage++;
+        // play next voice-line of active trader if there is an active trader
+        if (activeOffer)
+        {
+            voiceClipManager.PlayVoiceLine(activeTrader);
+            activeTrader.stage++;
+        }
 
         if (lastCall)
         {
