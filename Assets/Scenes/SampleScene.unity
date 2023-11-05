@@ -2756,7 +2756,13 @@ MonoBehaviour:
   traderPrefabList: []
   activeOffer: 0
   itemSpriteSlot: {fileID: 2146822570}
-  myCurrentItem: {fileID: 7977582194799403671, guid: 5b911e2cea7656b4cb0590bb3fac351c, type: 3}
+  myCurrentItem:
+    tags: 
+    sprite: {fileID: 0}
+    name: 0
+    condition: 2
+    baseValue: 0
+  startItem: {fileID: 7977582194799403671, guid: 5b911e2cea7656b4cb0590bb3fac351c, type: 3}
   currentCallIndex: 0
 --- !u!4 &1657023537
 Transform:
