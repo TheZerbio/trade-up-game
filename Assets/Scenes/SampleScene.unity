@@ -2678,7 +2678,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2885,7 +2885,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2981,7 +2981,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -4327,8 +4327,8 @@ MonoBehaviour:
   tutorialSource: {fileID: 1657023538}
   playButtonSoundsScript: {fileID: 934292753}
   callWindow: {fileID: 1923725757}
-  delayForNextCall_Offset: 3
-  delayForNextCall: 10
+  delayForNextCall_Offset: 1
+  delayForNextCall: 3
   callDuration: 6
   acceptTradeButton: {fileID: 1120718999}
   rejectTradeButton: {fileID: 1274990380}
