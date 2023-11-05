@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     public Text numberOfOffers_Text;
     public Canvas gameoverCanvas;
     public AudioSource tutorialSource;
+    public PlayButtonSounds playButtonSoundsScript;
 
     [Header("Call Settings")]
     public GameObject callWindow;
@@ -63,6 +64,8 @@ public class Player : MonoBehaviour
 
         callWindow.transform.GetChild(1).GetComponent<Text>().text = "Kundendienst";
         callWindow.SetActive(true);
+
+        playButtonSoundsScript.ActiveCall();
     }
 
     public void GenerateTraderList(bool firstItem)
@@ -97,6 +100,7 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(tutorialDelay);
         tutorialCall = false;
         callWindow.transform.GetChild(2).GetComponent<Button>().interactable = true;
+        callWindow.GetComponent<Animator>().enabled = true;
         GenerateTraderList(true);
     }
 
@@ -162,11 +166,12 @@ public class Player : MonoBehaviour
     {
         if (tutorialCall)
         {
-            StopAllCoroutines();
+            StopAllCoroutines();        
             tutorialSource.Stop();
             callWindow.transform.GetChild(2).GetComponent<Button>().interactable = true;
             tutorialCall = false;
             callWindow.SetActive(false);
+            callWindow.GetComponent<Animator>().enabled = true;
             GenerateTraderList(true);
         }
         else
@@ -279,6 +284,8 @@ public class Player : MonoBehaviour
         callWindow.transform.GetChild(1).GetComponent<Text>().text = traderPrefabList[currentCallIndex].GetComponent<Trader>().traderName;
         callWindow.SetActive(true);
 
+        playButtonSoundsScript.ActiveCall();
+
         yield return new WaitForSeconds(callDuration);
 
         remaining0ffers--;
@@ -318,9 +325,10 @@ public class Player : MonoBehaviour
         itemNameText.text = myCurrentItem.name;
         itemConditionText.text = TradeUpUtility.getConditionString(myCurrentItem.condition);
 
-        foreach(Tag t in myCurrentItem.tags)
+        itemTagsText.text = "";
+        foreach (Tag t in myCurrentItem.tags)
         {
-            itemTagsText.text = TradeUpUtility.getTagString(t) + "\n";
+            itemTagsText.text += TradeUpUtility.getTagString(t) + "\n";
         }      
     }
 
