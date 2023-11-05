@@ -27,6 +27,9 @@ public class Player : MonoBehaviour
 
     [Header("Player Item")]
     public Image itemSpriteSlot;
+    public Text itemNameText;
+    public Text itemConditionText;
+    public Text itemTagsText;
     public Item startItem;
     public Item targetItem;
 
@@ -52,7 +55,7 @@ public class Player : MonoBehaviour
     {
         numberOfTraders = GetNumberOfTradersBasedOnCurrentItemCondition(firstItem);
         remaining0ffers = numberOfTraders;
-        numberOfOffers_Text.text = "Interessenten für dein Produkt: " + remaining0ffers;
+        numberOfOffers_Text.text = "Interessenten: " + remaining0ffers;
 
         for (int i = 0; i < numberOfTraders; i++)
         {
@@ -82,7 +85,7 @@ public class Player : MonoBehaviour
         //voiceClipManager.PlayVoiceLine(traderPrefabList[currentTraderIndex + 1].GetComponent<Trader>());
 
         remaining0ffers--;
-        numberOfOffers_Text.text = "Interessenten für dein Produkt: " + remaining0ffers;
+        numberOfOffers_Text.text = "Interessenten: " + remaining0ffers;
 
         callWindow.SetActive(false);
 
@@ -126,7 +129,7 @@ public class Player : MonoBehaviour
         currentCallIndex++;
 
         remaining0ffers--;
-        numberOfOffers_Text.text = "Interessenten für dein Produkt: " + remaining0ffers;
+        numberOfOffers_Text.text = "Interessenten: " + remaining0ffers;
 
         // Wenn ich den letzten call gerade abgelehnt habe, dann disable reject button
         if (currentCallIndex >= traderPrefabList.Count)
@@ -190,7 +193,7 @@ public class Player : MonoBehaviour
         rejectTradeButton.gameObject.SetActive(false);
 
         traderPrefabList[currentTraderIndex].SetActive(false);
-        ShowCallAfterDelay(3);
+        StartCoroutine(ShowCallAfterDelay(3));
     }
 
     private IEnumerator ShowCallAfterDelay(float delay)
@@ -213,7 +216,9 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(callDuration);
 
         remaining0ffers--;
-        numberOfOffers_Text.text = "Interessenten für dein Produkt: " + remaining0ffers;
+        numberOfOffers_Text.text = "Interessenten: " + remaining0ffers;
+
+        traderPrefabList[currentTraderIndex].GetComponent<Trader>().addInterestTag();
 
         if (lastCall)
         {
@@ -237,6 +242,13 @@ public class Player : MonoBehaviour
     public void UpdateCurrentItem()
     {
         itemSpriteSlot.sprite = myCurrentItem.sprite; //.GetComponentInChildren<SpriteRenderer>().sprite;
+        itemNameText.text = myCurrentItem.name;
+        itemConditionText.text = TradeUpUtility.getConditionString(myCurrentItem.condition);
+
+        foreach(Tag t in myCurrentItem.tags)
+        {
+            itemTagsText.text = TradeUpUtility.getTagString(t) + "\n";
+        }      
     }
 
     public void ChangeCurrentItem(ItemStorage newItem)

@@ -35,43 +35,55 @@ public class ItemPool : MonoBehaviour
             }
         }
 
-        foreach (GameObject item in neuwertigItems)
+        for (int i = 0; i < 2; i++)
         {
-            if ((item.GetComponent<Item>().GetValueByCondition(Condition.Neuwertig) >= value * minRange) && (item.GetComponent<Item>().GetValueByCondition(Condition.Neuwertig) <= value * maxRange))
+            foreach (GameObject item in neuwertigItems)
             {
-                //item.GetComponent<Item>().condition = Condition.Neuwertig;
-                ItemStorage storage = new ItemStorage(item.GetComponent<Item>().name, Condition.Neuwertig, item.GetComponentInChildren<SpriteRenderer>().sprite, item.GetComponent<Item>().baseValue, item.GetComponent<Item>().tags);
-                possibleItems.Add(storage);
+                if ((item.GetComponent<Item>().GetValueByCondition(Condition.Neuwertig) >= value * minRange) && (item.GetComponent<Item>().GetValueByCondition(Condition.Neuwertig) <= value * maxRange))
+                {
+                    //item.GetComponent<Item>().condition = Condition.Neuwertig;
+                    ItemStorage storage = new ItemStorage(item.GetComponent<Item>().name, Condition.Neuwertig, item.GetComponentInChildren<SpriteRenderer>().sprite, item.GetComponent<Item>().baseValue, item.GetComponent<Item>().tags);
+                    possibleItems.Add(storage);
+                }
             }
         }
 
-        foreach (GameObject item in normalItems)
+        for(int i = 0; i < 4; i++)
         {
-            if ((item.GetComponent<Item>().GetValueByCondition(Condition.Normal) >= value * minRange) && (item.GetComponent<Item>().GetValueByCondition(Condition.Normal) <= value * maxRange))
+            foreach (GameObject item in normalItems)
             {
-                //item.GetComponent<Item>().condition = Condition.Normal;
-                ItemStorage storage = new ItemStorage(item.GetComponent<Item>().name, Condition.Normal, item.GetComponentInChildren<SpriteRenderer>().sprite, item.GetComponent<Item>().baseValue, item.GetComponent<Item>().tags);
-                possibleItems.Add(storage);
+                if ((item.GetComponent<Item>().GetValueByCondition(Condition.Normal) >= value * minRange) && (item.GetComponent<Item>().GetValueByCondition(Condition.Normal) <= value * maxRange))
+                {
+                    //item.GetComponent<Item>().condition = Condition.Normal;
+                    ItemStorage storage = new ItemStorage(item.GetComponent<Item>().name, Condition.Normal, item.GetComponentInChildren<SpriteRenderer>().sprite, item.GetComponent<Item>().baseValue, item.GetComponent<Item>().tags);
+                    possibleItems.Add(storage);
+                }
             }
         }
 
-        foreach (GameObject item in gebrauchtItems)
+        for (int i = 0; i < 2; i++)
         {
-            if ((item.GetComponent<Item>().GetValueByCondition(Condition.Gebraucht) >= value * minRange) && (item.GetComponent<Item>().GetValueByCondition(Condition.Gebraucht) <= value * maxRange))
+            foreach (GameObject item in gebrauchtItems)
             {
-                //item.GetComponent<Item>().condition = Condition.Gebraucht;
-                ItemStorage storage = new ItemStorage(item.GetComponent<Item>().name, Condition.Gebraucht, item.GetComponentInChildren<SpriteRenderer>().sprite, item.GetComponent<Item>().baseValue, item.GetComponent<Item>().tags);
-                possibleItems.Add(storage);
+                if ((item.GetComponent<Item>().GetValueByCondition(Condition.Gebraucht) >= value * minRange) && (item.GetComponent<Item>().GetValueByCondition(Condition.Gebraucht) <= value * maxRange))
+                {
+                    //item.GetComponent<Item>().condition = Condition.Gebraucht;
+                    ItemStorage storage = new ItemStorage(item.GetComponent<Item>().name, Condition.Gebraucht, item.GetComponentInChildren<SpriteRenderer>().sprite, item.GetComponent<Item>().baseValue, item.GetComponent<Item>().tags);
+                    possibleItems.Add(storage);
+                }
             }
         }
 
-        foreach (GameObject item in beschädigtItems)
+        for (int i = 0; i < 2; i++)
         {
-            if ((item.GetComponent<Item>().GetValueByCondition(Condition.Defekt) >= value * minRange) && (item.GetComponent<Item>().GetValueByCondition(Condition.Defekt) <= value * maxRange))
+            foreach (GameObject item in beschädigtItems)
             {
-                //item.GetComponent<Item>().condition = Condition.Defekt;
-                ItemStorage storage = new ItemStorage(item.GetComponent<Item>().name, Condition.Defekt, item.GetComponentInChildren<SpriteRenderer>().sprite, item.GetComponent<Item>().baseValue, item.GetComponent<Item>().tags);
-                possibleItems.Add(storage);
+                if ((item.GetComponent<Item>().GetValueByCondition(Condition.Defekt) >= value * minRange) && (item.GetComponent<Item>().GetValueByCondition(Condition.Defekt) <= value * maxRange))
+                {
+                    //item.GetComponent<Item>().condition = Condition.Defekt;
+                    ItemStorage storage = new ItemStorage(item.GetComponent<Item>().name, Condition.Defekt, item.GetComponentInChildren<SpriteRenderer>().sprite, item.GetComponent<Item>().baseValue, item.GetComponent<Item>().tags);
+                    possibleItems.Add(storage);
+                }
             }
         }
 
