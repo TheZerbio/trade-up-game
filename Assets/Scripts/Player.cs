@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
     [Header("Player Item")]
     public Image itemSpriteSlot;
     public ItemStorage myCurrentItem;
+    public Item startItem;
 
 
     private int currentTraderIndex = 0;
@@ -38,6 +39,7 @@ public class Player : MonoBehaviour
 
     public void Start()
     {
+        myCurrentItem = new ItemStorage(startItem.name, Condition.Normal, startItem.GetComponentInChildren<SpriteRenderer>().sprite, startItem.baseValue, startItem.tags);
         UpdateCurrentItem();
         GenerateTraderList(true);
     }
