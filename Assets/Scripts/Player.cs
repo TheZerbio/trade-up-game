@@ -195,7 +195,7 @@ public class Player : MonoBehaviour
             callWindow.transform.GetChild(3).GetComponent<Button>().interactable = false;
         }
 
-        callWindow.transform.GetChild(0).GetComponent<Image>().sprite = traderPrefabList[currentCallIndex].GetComponent<Trader>().profilePicture;
+        //callWindow.transform.GetChild(0).GetComponent<Image>().sprite = traderPrefabList[currentCallIndex].GetComponent<Trader>().profilePicture;
         callWindow.transform.GetChild(1).GetComponent<Text>().text = traderPrefabList[currentCallIndex].GetComponent<Trader>().traderName;
         callWindow.SetActive(true);
 
