@@ -2779,18 +2779,17 @@ MonoBehaviour:
   voiceClipManager: {fileID: 529177643}
   numberOfOffers_Text: {fileID: 1323172598}
   callWindow: {fileID: 1923725757}
-  acceptTradeButton: {fileID: 1120718999}
-  rejectTradeButton: {fileID: 242957635}
   delayForNextCall_Offset: 3
   delayForNextCall: 10
   callDuration: 6
-  minTraderForCurrentItem: 2
-  maxTraderForCurrentItem: 8
+  acceptTradeButton: {fileID: 1120718999}
+  rejectTradeButton: {fileID: 242957635}
   traderPrefab: {fileID: 4264520629112482932, guid: 11815fc233cbcd14e8425ae99f87886e, type: 3}
   traderPrefabParent: {fileID: 818453957}
-  traderPrefabList: []
-  activeOffer: 0
   itemSpriteSlot: {fileID: 2146822570}
+  startItem: {fileID: 7977582194799403671, guid: 5b911e2cea7656b4cb0590bb3fac351c, type: 3}
+  targetItem: {fileID: 7977582194799403671, guid: 1a48e33652495be42a6d2afcf3557742, type: 3}
+  traderPrefabList: []
   myCurrentItem:
     tags: 
     sprite: {fileID: 0}
@@ -2798,6 +2797,7 @@ MonoBehaviour:
     condition: 0
     baseValue: 0
   currentCallIndex: 0
+  activeOffer: 0
 --- !u!4 &1657023537
 Transform:
   m_ObjectHideFlags: 0

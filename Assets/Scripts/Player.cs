@@ -12,29 +12,32 @@ public class Player : MonoBehaviour
 
     [Header("Call Settings")]
     public GameObject callWindow;
+    public float delayForNextCall_Offset;
+    public float delayForNextCall;
+    public float callDuration;
 
     [Header("Trader Settings")]
     public Button acceptTradeButton;
     public Button rejectTradeButton;
-    public float delayForNextCall_Offset;
-    public float delayForNextCall;
-    public float callDuration;
-    public int minTraderForCurrentItem;
-    public int maxTraderForCurrentItem;
+    private int minTraderForCurrentItem;
+    private int maxTraderForCurrentItem;
     public GameObject traderPrefab;
-    public Transform traderPrefabParent;
-    public List<GameObject> traderPrefabList = new List<GameObject>();
-    private int numberOfTraders;
-    public bool activeOffer = false;
+    public Transform traderPrefabParent;   
+    private int numberOfTraders; 
 
     [Header("Player Item")]
     public Image itemSpriteSlot;
-    public ItemStorage myCurrentItem;
     public Item startItem;
+    public Item targetItem;
 
+    [Header("Debug Variables (Don't Set!!)")]
+    public List<GameObject> traderPrefabList = new List<GameObject>();
+    public ItemStorage myCurrentItem;
+    public int currentCallIndex = 0;
+    public bool activeOffer = false;
 
     private int currentTraderIndex = 0;
-    public int currentCallIndex = 0;
+    
 
 
     public void Start()
@@ -153,7 +156,19 @@ public class Player : MonoBehaviour
         rejectTradeButton.gameObject.SetActive(false);
         callWindow.transform.GetChild(3).GetComponent<Button>().interactable = true;
 
-        GenerateTraderList(false);
+        bool winning = CheckWinningCondition();
+
+        if (!winning)
+            GenerateTraderList(false);
+        else
+            Debug.Log("WIIIIINNNNNN !!!!");
+    }
+
+    public bool CheckWinningCondition()
+    {
+        if(myCurrentItem.name == targetItem.name)
+            return true;
+        return false;
     }
 
     public void RejectTrade()
