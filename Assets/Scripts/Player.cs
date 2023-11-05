@@ -83,7 +83,7 @@ public class Player : MonoBehaviour
         // play random opening line
         voiceClipManager.PlayVoiceLine(activeTrader);
         // disable opening lines from same trader
-        activeTrader.stage++;
+        activeTrader.firstCall = false;
 
         if (!activeOffer)
         {
@@ -117,15 +117,11 @@ public class Player : MonoBehaviour
     {
         StopAllCoroutines();
         callWindow.SetActive(false);
-
-        Trader activeTrader = traderPrefabList[currentTraderIndex].GetComponent<Trader>();
-
         // play secondary voice lines of active trader
-        voiceClipManager.PlayVoiceLine(activeTrader);
-        // increase number of voicelines played by same trader
-        activeTrader.stage++;
+        Debug.Log("Play Next Line");
+        voiceClipManager.PlayVoiceLine(traderPrefabList[currentTraderIndex].GetComponent<Trader>());
 
-        activeTrader.addInterestTag();
+        traderPrefabList[currentTraderIndex].GetComponent<Trader>().addInterestTag();
 
         currentCallIndex++;
 
@@ -183,8 +179,6 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-        Trader activeTrader = traderPrefabList[currentTraderIndex].GetComponent<Trader>();
-
         bool lastCall = false;
 
         if ((currentCallIndex + 1) >= traderPrefabList.Count && !activeOffer)
@@ -199,10 +193,6 @@ public class Player : MonoBehaviour
         callWindow.SetActive(true);
 
         yield return new WaitForSeconds(callDuration);
-
-        // play next voice-line of active trader
-        voiceClipManager.PlayVoiceLine(activeTrader);
-        activeTrader.stage++;
 
         if (lastCall)
         {
