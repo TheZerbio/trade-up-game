@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     public VoiceClipManager voiceClipManager;
-    public TMP_Text numberOfOffers_Text;
+    public Text numberOfOffers_Text;
 
     [Header("Call Settings")]
     public GameObject callWindow;
@@ -196,7 +196,7 @@ public class Player : MonoBehaviour
         }
 
         callWindow.transform.GetChild(0).GetComponent<Image>().sprite = traderPrefabList[currentCallIndex].GetComponent<Trader>().profilePicture;
-        callWindow.transform.GetChild(1).GetComponent<TMP_Text>().text = traderPrefabList[currentCallIndex].GetComponent<Trader>().traderName;
+        callWindow.transform.GetChild(1).GetComponent<Text>().text = traderPrefabList[currentCallIndex].GetComponent<Trader>().traderName;
         callWindow.SetActive(true);
 
         yield return new WaitForSeconds(callDuration);
