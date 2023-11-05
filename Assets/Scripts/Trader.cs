@@ -39,7 +39,7 @@ public class Trader : MonoBehaviour
 
         //Initialise Local Variables
         audioSource = gameObject.GetComponent<AudioSource>();
-        philantropy = Random.Range(0.5f, 1.5f);         // philantropy = Random.Range(-1.0F, 1.0F);
+        philantropy = Random.Range(0.5f, 1.5f);    // Random.Range(2.0f, 5.0f);     // philantropy = Random.Range(-1.0F, 1.0F);
         knowledge = Random.Range(0.1f, 0.4f);           // knowledge = Random.Range(-1.0F, 1.0F);
         traderName = TradeUpUtility.GetRandomUsername();
         starRating = TradeUpUtility.generateStarRating(philantropy, knowledge);

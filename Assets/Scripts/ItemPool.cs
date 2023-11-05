@@ -5,6 +5,7 @@ using UnityEngine;
 public class ItemPool : MonoBehaviour
 {
     public List<GameObject> itemList = new List<GameObject>();
+    public GameObject tophat;
 
     public ItemStorage GetRandomItemByValue(float value, float minRange, float maxRange)
     {
@@ -96,7 +97,12 @@ public class ItemPool : MonoBehaviour
             }
             **/
 
-            return possibleItems[Random.Range(0, possibleItems.Count)];
+            ItemStorage item = possibleItems[Random.Range(0, possibleItems.Count)];
+
+            if(item.name == tophat.name)
+                item.condition = Condition.Normal;
+
+            return item;
         }
         else
         {          

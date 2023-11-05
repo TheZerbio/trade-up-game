@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
 {
     public VoiceClipManager voiceClipManager;
     public Text numberOfOffers_Text;
+    public Canvas gameoverCanvas;
 
     [Header("Call Settings")]
     public GameObject callWindow;
@@ -31,7 +32,7 @@ public class Player : MonoBehaviour
     public Text itemConditionText;
     public Text itemTagsText;
     public Item startItem;
-    public Item targetItem;
+    public GameObject targetItem;
 
     [Header("Debug Variables (Don't Set!!)")]
     public List<GameObject> traderPrefabList = new List<GameObject>();
@@ -173,9 +174,15 @@ public class Player : MonoBehaviour
             GenerateTraderList(false);
         else
         {
-            numberOfOffers_Text.text = "Du hast gewonnen!";
-            Debug.Log("WIIIIINNNNNN !!!!");
+            numberOfOffers_Text.text = "Du hast gewonnen!";           
+            StartCoroutine(DisplayWinningScreen());
         }
+    }
+
+    private IEnumerator DisplayWinningScreen()
+    {
+        yield return new WaitForSeconds(3);
+        gameoverCanvas.gameObject.SetActive(true);
     }
 
     public bool CheckWinningCondition()
