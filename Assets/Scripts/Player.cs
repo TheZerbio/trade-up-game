@@ -112,19 +112,24 @@ public class Player : MonoBehaviour
         {
             StopAllCoroutines();
 
-            //voiceClipManager.PlayVoiceLine(traderPrefabList[currentTraderIndex + 1].GetComponent<Trader>());
-
-            remaining0ffers--;
-            numberOfOffers_Text.text = "Interessenten: " + remaining0ffers;
+        remaining0ffers--;
+        numberOfOffers_Text.text = "Interessenten: " + remaining0ffers;
 
             callWindow.SetActive(false);
 
             currentTraderIndex = currentCallIndex;
 
-            if (!activeOffer)
-            {
-                acceptTradeButton.gameObject.SetActive(true);
-                rejectTradeButton.gameObject.SetActive(true);
+        Trader activeTrader = traderPrefabList[currentTraderIndex].GetComponent<Trader>();
+
+        // play random opening line
+        voiceClipManager.PlayVoiceLine(activeTrader);
+        // disable opening lines from same trader
+        activeTrader.stage++;
+
+        if (!activeOffer)
+        {
+            acceptTradeButton.gameObject.SetActive(true);
+            rejectTradeButton.gameObject.SetActive(true);
 
                 traderPrefabList[currentTraderIndex].SetActive(true);
                 activeOffer = true;
@@ -165,6 +170,13 @@ public class Player : MonoBehaviour
             StopAllCoroutines();
             callWindow.SetActive(false);
             Debug.Log("Play New Voice Line");
+
+            Trader activeTrader = traderPrefabList[currentTraderIndex].GetComponent<Trader>();
+
+            // play secondary voice lines of active trader
+            voiceClipManager.PlayVoiceLine(activeTrader);
+            // increase number of voicelines played by same trader
+            activeTrader.stage++;
 
             traderPrefabList[currentTraderIndex].GetComponent<Trader>().addInterestTag();
             currentCallIndex++;
@@ -248,6 +260,8 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
+        Trader activeTrader = traderPrefabList[currentTraderIndex].GetComponent<Trader>();
+
         bool lastCall = false;
 
         if ((currentCallIndex + 1) >= traderPrefabList.Count && !activeOffer)
@@ -267,6 +281,13 @@ public class Player : MonoBehaviour
         numberOfOffers_Text.text = "Interessenten: " + remaining0ffers;
 
         traderPrefabList[currentTraderIndex].GetComponent<Trader>().addInterestTag();
+
+        // play next voice-line of active trader if there is an active trader
+        if (activeOffer)
+        {
+            voiceClipManager.PlayVoiceLine(activeTrader);
+            activeTrader.stage++;
+        }
 
         if (lastCall)
         {
