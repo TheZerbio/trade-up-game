@@ -47,7 +47,7 @@ public class VoiceClipManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Loading VoiceClips");
+        Debug.Log("Loading VoiceClips...");
         vcs = LoadVoiceClips();
         Debug.Log(vcs.Length + " VoiceClips loaded");
     }
@@ -63,8 +63,8 @@ public class VoiceClipManager : MonoBehaviour
 
         VoiceClip currentVC = bestNVCs[trader.stage].Item2;
 
-        Debug.Log("Stimme: " + trader.voiceType + " Stage: " + trader.stage);
-        Debug.Log("Interest T/V: " + (trader.philantropy*2 - 2.0f) + "/" + currentVC.philanthropy + " Knowledge T/V: " + (trader.knowledge * 2 - 0.2f) + "/" + currentVC.knowledge);
+        Debug.Log("Stimme T/V: " + trader.voiceType + "/" + currentVC.voiceType + " Stage T/V: " + trader.stage + currentVC.stage);
+        //Debug.Log("Interest T/V: " + (trader.philantropy*2 - 2.0f) + "/" + currentVC.philanthropy + " Knowledge T/V: " + (trader.knowledge * 2 - 0.2f) + "/" + currentVC.knowledge);
         Debug.Log("Distanz: " + bestNVCs[trader.stage].Item1);
 
         source.clip = currentVC.audioClip;
@@ -95,7 +95,7 @@ public class VoiceClipManager : MonoBehaviour
             var distance = float.MaxValue;
 
             int currStage = 1;
-            if (trader.stage >= 2)
+            if (trader.stage >= 1)
             {
                 currStage = 2;
             } 
@@ -130,7 +130,7 @@ public class VoiceClipManager : MonoBehaviour
 
             string[] temp2 = temp.Split('_');
 
-            Debug.Log("Loading.." + temp);
+            //Debug.Log("Loading.." + temp);
 
             // by god lets just hope this works
 
