@@ -10,8 +10,8 @@ public class Trader : MonoBehaviour
     public float knowledge; // Fähigheite das Item richtig ein zu schätzen = informed
     public float starRating = 2.5F;
     public string traderName = "DefaultName";
-    public int voiceType;
-    public bool firstCall;
+    public int voiceType;           // which voice should be played?
+    public int stage;               // how many voiceLines have been called already?
     public Sprite profilePicture;
     public Image tradeItemImageSlot;
     //public Item traderItem;
@@ -43,8 +43,8 @@ public class Trader : MonoBehaviour
         knowledge = Random.Range(0.1f, 0.4f);           // knowledge = Random.Range(-1.0F, 1.0F);
         traderName = TradeUpUtility.GetRandomUsername();
         starRating = TradeUpUtility.generateStarRating(philantropy, knowledge);
-        firstCall = true;                   // to get the intro voiceline first
-        voiceType = 1; //Random.Range(1, 2);     // random person voice
+        stage = 0;                      // to get the intro voiceline first
+        voiceType = Random.Range(1, 3);     // random person voice
 
         //Debug.Log("Player Item Base Value: " + player.myCurrentItem.baseValue);
         //Debug.Log("Player Item Subjective Value: " + getSubjectiveValue(player.myCurrentItem));
