@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
     public ItemStorage myCurrentItem;
     public int currentCallIndex = 0;
     public bool activeOffer = false;
+    public bool tutorialCall = true;
 
     private int currentTraderIndex = 0;
     private int remaining0ffers = 0;
@@ -49,7 +50,18 @@ public class Player : MonoBehaviour
     {
         myCurrentItem = new ItemStorage(startItem.name, Condition.Normal, startItem.GetComponentInChildren<SpriteRenderer>().sprite, startItem.baseValue, startItem.tags);
         UpdateCurrentItem();
-        GenerateTraderList(true);
+
+        StartCoroutine(ShowTutorialCall());
+
+        //GenerateTraderList(true);
+    }
+
+    public IEnumerator ShowTutorialCall()
+    {
+        yield return new WaitForSeconds(3);
+
+        callWindow.transform.GetChild(1).GetComponent<Text>().text = "Kundendienst";
+        callWindow.SetActive(true);
     }
 
     public void GenerateTraderList(bool firstItem)
@@ -79,67 +91,96 @@ public class Player : MonoBehaviour
             //rejectTradeButton.interactable = false;
     }
 
+    public IEnumerator Delay(float tutorialDelay)
+    {
+        yield return new WaitForSeconds(tutorialDelay);
+        tutorialCall = false;
+        callWindow.transform.GetChild(2).GetComponent<Button>().interactable = true;
+        GenerateTraderList(true);
+    }
+
     public void ShowNewOffer()
     {
-        StopAllCoroutines();
-
-        //voiceClipManager.PlayVoiceLine(traderPrefabList[currentTraderIndex + 1].GetComponent<Trader>());
-
-        remaining0ffers--;
-        numberOfOffers_Text.text = "Interessenten: " + remaining0ffers;
-
-        callWindow.SetActive(false);
-
-        currentTraderIndex = currentCallIndex;
-
-        if (!activeOffer)
-        {
-            acceptTradeButton.gameObject.SetActive(true);
-            rejectTradeButton.gameObject.SetActive(true);
-
-            traderPrefabList[currentTraderIndex].SetActive(true);
-            activeOffer = true;
+        if (tutorialCall)
+        {          
+            callWindow.transform.GetChild(2).GetComponent<Button>().interactable = false;
+            callWindow.GetComponent<Animator>().enabled = false;
+            Debug.Log("Play Tutorial Voice Line");
+            StartCoroutine(Delay(90));
         }
         else
         {
-            foreach(GameObject trader in traderPrefabList)
+            StopAllCoroutines();
+
+            //voiceClipManager.PlayVoiceLine(traderPrefabList[currentTraderIndex + 1].GetComponent<Trader>());
+
+            remaining0ffers--;
+            numberOfOffers_Text.text = "Interessenten: " + remaining0ffers;
+
+            callWindow.SetActive(false);
+
+            currentTraderIndex = currentCallIndex;
+
+            if (!activeOffer)
             {
-                trader.SetActive(false);
-            }
-            traderPrefabList[currentTraderIndex].SetActive(true);
-        }
+                acceptTradeButton.gameObject.SetActive(true);
+                rejectTradeButton.gameObject.SetActive(true);
 
-        if (currentTraderIndex == traderPrefabList.Count - 1)
-        {
-            rejectTradeButton.interactable = false;
-        }
-        else
-        {
-            currentCallIndex++;
-            StartCoroutine(ShowCallAfterDelay(Random.Range(delayForNextCall - delayForNextCall_Offset, delayForNextCall + delayForNextCall_Offset)));
+                traderPrefabList[currentTraderIndex].SetActive(true);
+                activeOffer = true;
+            }
+            else
+            {
+                foreach (GameObject trader in traderPrefabList)
+                {
+                    trader.SetActive(false);
+                }
+                traderPrefabList[currentTraderIndex].SetActive(true);
+            }
+
+            if (currentTraderIndex == traderPrefabList.Count - 1)
+            {
+                rejectTradeButton.interactable = false;
+            }
+            else
+            {
+                currentCallIndex++;
+                StartCoroutine(ShowCallAfterDelay(Random.Range(delayForNextCall - delayForNextCall_Offset, delayForNextCall + delayForNextCall_Offset)));
+            }
         }
     }
 
     public void RejectCall()
     {
-        StopAllCoroutines();
-        callWindow.SetActive(false);
-        Debug.Log("Play New Voice Line");
-
-        traderPrefabList[currentTraderIndex].GetComponent<Trader>().addInterestTag();
-        currentCallIndex++;
-
-        remaining0ffers--;
-        numberOfOffers_Text.text = "Interessenten: " + remaining0ffers;
-
-        // Wenn ich den letzten call gerade abgelehnt habe, dann disable reject button
-        if (currentCallIndex >= traderPrefabList.Count)
+        if (tutorialCall)
         {
-            rejectTradeButton.interactable = false;
-            return;
+            StopAllCoroutines();
+            callWindow.transform.GetChild(2).GetComponent<Button>().interactable = true;
+            tutorialCall = false;
+            callWindow.SetActive(false);
+            GenerateTraderList(true);
         }
+        else
+        {
+            StopAllCoroutines();
+            callWindow.SetActive(false);
+            Debug.Log("Play New Voice Line");
 
-        StartCoroutine(ShowCallAfterDelay(Random.Range(delayForNextCall - delayForNextCall_Offset, delayForNextCall + delayForNextCall_Offset)));
+            traderPrefabList[currentTraderIndex].GetComponent<Trader>().addInterestTag();
+            currentCallIndex++;
+
+            remaining0ffers--;
+            numberOfOffers_Text.text = "Interessenten: " + remaining0ffers;
+
+            // Wenn ich den letzten call gerade abgelehnt habe, dann disable reject button
+            if (currentCallIndex >= traderPrefabList.Count)
+            {
+                rejectTradeButton.interactable = false;
+                return;
+            }
+
+            StartCoroutine(ShowCallAfterDelay(Random.Range(delayForNextCall - delayForNextCall_Offset, delayForNextCall + delayForNextCall_Offset)));
+        }
     }
 
     public void AcceptTrade()
